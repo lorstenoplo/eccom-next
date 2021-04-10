@@ -62,6 +62,9 @@ const useStyles = makeStyles(
           justifyContent: "center",
         },
       },
+      link: {
+        "-webkit-tap-highlight-color": "transparent",
+      },
     } as const)
 );
 

@@ -11,7 +11,6 @@ import { useQuery } from "react-query";
 import { fetchProducts } from "../api-functions/queries/fetchProducts";
 import { Layout, Product } from "../components";
 import useStyles from "../mui-styles/Home_Styles";
-import styles from "../styles/Home.module.css";
 import ScrollToTop from "../utils/ScrollToTop";
 
 function Alert(props: AlertProps) {
@@ -88,7 +87,7 @@ const Index: React.FC = () => {
                   href="/products/[productId]"
                   as={`/products/${_id}`}
                 >
-                  <a className={styles.link}>
+                  <a className={classes.link}>
                     <Product
                       key={_id}
                       id={_id}
