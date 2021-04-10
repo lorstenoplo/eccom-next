@@ -1,40 +1,38 @@
+import { IconButton, Snackbar } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import CloseIcon from "@material-ui/icons/Close";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { motion } from "framer-motion";
-import { withUrqlClient } from "next-urql";
 import Head from "next/head";
 import Link from "next/link";
-import { Layout, Product } from "../components";
-import { useProductsQuery } from "../src/generated/graphql";
-import styles from "../styles/Home.module.css";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
 import React from "react";
-import ScrollToTop from "../utils/ScrollToTop";
+import { useQuery } from "react-query";
+import { fetchProducts } from "../api-functions/queries/fetchProducts";
+import { Layout, Product } from "../components";
 import useStyles from "../mui-styles/Home_Styles";
-import Skeleton from "@material-ui/lab/Skeleton";
-import { Snackbar, IconButton } from "@material-ui/core";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import CloseIcon from "@material-ui/icons/Close";
+import styles from "../styles/Home.module.css";
+import ScrollToTop from "../utils/ScrollToTop";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const Index: React.FC = () => {
-  const [{ data, fetching, error }] = useProductsQuery();
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const { isLoading, isError, data, error } = useQuery("todos", fetchProducts, {
+    retry: 1,
+  });
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+  const [open, setOpen] = React.useState(true);
+
+  const handleClose = (_event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
 
     setOpen(false);
   };
-
-  if (error) {
-    return <div style={{ color: "red" }}>{error.message}</div>;
-  }
 
   const stagger = {
     animate: {
@@ -67,7 +65,7 @@ const Index: React.FC = () => {
             alignItems="center"
             className={classes.productsContainer}
           >
-            {fetching &&
+            {isLoading &&
               [1, 2, 3, 4, 5, 6].map((_, i) => (
                 <Skeleton
                   variant="rect"
@@ -76,24 +74,24 @@ const Index: React.FC = () => {
                   animation="wave"
                   style={{
                     borderRadius: "12px",
-                    marginBottom: 10,
-                    marginTop: 10,
+                    marginBottom: 15,
+                    marginTop: 15,
                   }}
                   key={i}
                 />
               ))}
 
             {data &&
-              data.products.map(({ id, imageURL, price, rating, title }) => (
+              data.map(({ _id, imageURL, price, rating, title }: any) => (
                 <Link
                   scroll={false}
                   href="/products/[productId]"
-                  as={`/products/${id}`}
+                  as={`/products/${_id}`}
                 >
                   <a className={styles.link}>
                     <Product
-                      key={id}
-                      id={id}
+                      key={_id}
+                      id={_id}
                       imageURL={imageURL}
                       rating={rating}
                       title={title}
@@ -104,24 +102,16 @@ const Index: React.FC = () => {
               ))}
           </Box>
         </motion.div>
-        {error && (
+
+        {isError && (
           <Snackbar
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             open={open}
-            autoHideDuration={3000}
             onClose={handleClose}
-            action={
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            }
           >
-            <Alert severity="error">{(error as any).message}</Alert>
+            <Alert onClose={handleClose} severity="error">
+              Something went wrong
+            </Alert>
           </Snackbar>
         )}
       </Layout>
@@ -130,4 +120,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: true })(Index);
+export default Index;

@@ -1,37 +1,42 @@
-import { LoadingScreen } from "../../components";
-import { withUrqlClient, NextComponentType } from "next-urql";
-import { CreateUrqlClient } from "../../utils/createUrqlClient";
-import { useProductQuery } from "../../src/generated/graphql";
-import Head from "next/head";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { Button, Tooltip, Zoom, IconButton, Badge } from "@material-ui/core";
-import { useStateValue } from "../../context/StateProvider";
-import { useRouter } from "next/router";
+import { Badge, Button, IconButton, Tooltip, Zoom } from "@material-ui/core";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import { motion } from "framer-motion";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import { fetchProduct } from "../../api-functions/queries/fetchProduct";
+import { LoadingScreen } from "../../components";
+import { useStateValue } from "../../context/StateProvider";
 import useStyles from "../../mui-styles/Product_Styles";
+import { NextPage } from "next";
 
-const ProductPage: NextComponentType<
-  { query: any; AppTree: any; pathname: string },
-  {},
-  {}
-> = ({ productId }) => {
-  const [{ data, fetching, error }] = useProductQuery({
-    variables: {
-      productId,
+const ProductPage: NextPage<{ productId: string }> = ({ productId }) => {
+  const { isLoading, isError, data, error } = useQuery(
+    ["product", productId],
+    async () => {
+      const data = await fetchProduct(productId as string);
+      return data;
     },
-  });
+    {
+      retry: 1,
+    }
+  );
 
   const classes = useStyles();
 
   const { dispatch, state } = useStateValue();
   const router = useRouter();
 
-  if (fetching) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
-  if (error) {
-    return <p>{error.message}</p>;
+  if (isError) {
+    return (
+      <motion.p initial="initial" animate="animate" exit={{ opacity: 0 }}>
+        {error as string}
+      </motion.p>
+    );
   }
 
   let easing = [0.6, -0.05, 0.01, 0.99];
@@ -61,15 +66,15 @@ const ProductPage: NextComponentType<
   };
 
   const addToBasket = () => {
-    if (data?.product) {
+    if (data) {
       dispatch({
         type: "ADD_TO_BASKET",
         value: {
-          id: data.product.id,
-          title: data.product.title,
-          imageURL: data.product.imageURL,
-          rating: data.product.rating,
-          price: data.product.price,
+          id: data._id,
+          title: data.title,
+          imageURL: data.imageURL,
+          rating: data.rating,
+          price: data.price,
         },
       });
     }
@@ -83,7 +88,7 @@ const ProductPage: NextComponentType<
       exit={{ opacity: 0 }}
     >
       <Head>
-        <title>{data?.product?.title || "Loading..."}</title>
+        <title>{data?.title || "Loading..."}</title>
       </Head>
 
       <motion.div
@@ -92,8 +97,8 @@ const ProductPage: NextComponentType<
         className={classes.imageCont}
       >
         <motion.img
-          src={data?.product?.imageURL}
-          alt={data?.product?.title || "error"}
+          src={data?.imageURL}
+          alt={data?.title || "error"}
           animate={{ x: 0, opacity: 1 }}
           initial={{ x: 200, opacity: 0 }}
           exit={{ opacity: 0 }}
@@ -121,7 +126,7 @@ const ProductPage: NextComponentType<
               </IconButton>
             </Tooltip>
           </motion.div>
-          <motion.h1 variants={fadeInUp}>{data?.product?.title}</motion.h1>
+          <motion.h1 variants={fadeInUp}>{data?.title}</motion.h1>
           <motion.p className={classes.productInfo} variants={fadeInUp}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             suscipit quaerat quod, accusantium ipsa eum officiis quam, accusamus
@@ -153,4 +158,4 @@ ProductPage.getInitialProps = ({ query }) => {
   };
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: true })(ProductPage);
+export default ProductPage;

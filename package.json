@@ -24,6 +24,7 @@
     "react-credit-cards": "^0.8.3",
     "react-dom": "17.0.1",
     "react-is": "^17.0.1",
+    "react-query": "^3.13.5",
     "urql": "^1.11.6"
   },
   "devDependencies": {
