@@ -1,6 +1,4 @@
 import React from "react";
-import { withUrqlClient } from "next-urql";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
 import { Typography, Button, Box } from "@material-ui/core";
 import { Layout } from "../components";
 import { motion } from "framer-motion";
@@ -68,7 +66,7 @@ const about = () => {
                 disableElevation
                 color="primary"
                 size="large"
-                onClick={() => router.push("/register")}
+                onClick={() => router.push("/test")}
               >
                 Get Started
               </Button>
@@ -89,4 +87,4 @@ const about = () => {
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: true })(about);
+export default about;

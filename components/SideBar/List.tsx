@@ -16,7 +16,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import ReportIcon from "@material-ui/icons/Report";
 import { useRouter } from "next/router";
 import Report from "../Report";
-import useGetUser from "../../utils/useGetUser";
+// import useGetUser from "../../utils/useGetUser";
 import LoadingScreen from "../LoadingScreen";
 
 type listProps = {
@@ -28,15 +28,15 @@ type listProps = {
 
 const CustomList: React.FC<listProps> = ({ classes }) => {
   const router = useRouter();
-  const [user, fetching, error] = useGetUser();
+  // const [user, fetching, error] = useGetUser();
 
-  if (fetching) {
-    return <LoadingScreen />;
-  }
+  // if (fetching) {
+  //   return <LoadingScreen />;
+  // }
 
-  if (error) {
-    return <p color="red">{error.message}</p>;
-  }
+  // if (error) {
+  //   return <p color="red">{error.message}</p>;
+  // }
 
   return (
     <div

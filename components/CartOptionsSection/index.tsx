@@ -5,7 +5,7 @@ import { Box, Button } from "@material-ui/core";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-import useGetUser from "../../utils/useGetUser";
+// import useGetUser from "../../utils/useGetUser";
 import PersonPinCircleOutlinedIcon from "@material-ui/icons/PersonPinCircleOutlined";
 import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
@@ -13,7 +13,7 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import useStyles from "./styles";
 
 const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
-  const [user] = useGetUser();
+  // const [user] = useGetUser();
   const classes = useStyles();
   return (
     <Box className={classes.container}>
@@ -32,7 +32,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
             <AlternateEmailRoundedIcon fontSize="small" />
           </Box>
           <CartOption.SubTitle>
-            {user?.username || "guest"}@gmail.com
+            {/* {user?.username || "guest"}@gmail.com */}
           </CartOption.SubTitle>
         </CartOption.Info>
       </CartOption>
@@ -50,7 +50,8 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           <Box color="rgb(117 0 245)" mr={1}>
             <AccountCircleOutlinedIcon fontSize="small" />
           </Box>
-          <CartOption.SubTitle>{user?.username}</CartOption.SubTitle>
+          <CartOption.SubTitle>me</CartOption.SubTitle>
+          {/* <CartOption.SubTitle>{user?.username}</CartOption.SubTitle> */}
         </CartOption.Info>
         <CartOption.Info>
           <Box color="rgb(117 0 245)" mr={1}>

@@ -22,7 +22,6 @@ import { useRouter } from "next/router";
 import React, { cloneElement } from "react";
 import { useStateValue } from "../../context/StateProvider";
 import { Props } from "../../types/HomePageProps";
-import useGetUser from "../../utils/useGetUser";
 import SideBar from "../SideBar";
 import { green, blue } from "@material-ui/core/colors";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -132,7 +131,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const { state } = useStateValue();
-  const [user, fetching, error] = useGetUser();
+  // const [user, fetching, error] = useGetUser();
   const router = useRouter();
 
   //if (fetching) return <LoadingScreen />;
@@ -140,39 +139,39 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   // if (error) return <p>{error.message}</p>;
 
   let UserBody = () => <></>;
-  if (!user) {
-    // user is logged out
-    UserBody = () => (
-      <>
-        <MenuItem button onClick={() => router.push("/login")}>
-          Login
-        </MenuItem>
-        <MenuItem button onClick={() => router.push("/register")}>
-          Register
-        </MenuItem>
-      </>
-    );
-    //console.log("not logged in");
-  } else {
-    // user is logged in
-    UserBody = () => (
-      <>
-        <MenuItem button onClick={() => router.push("/account")}>
-          My account
-        </MenuItem>
-        <MenuItem>{user?.username}</MenuItem>
-        <MenuItem
-          onClick={() => {
-            localStorage.removeItem("qid");
-            router.replace("/login");
-          }}
-        >
-          Logout
-        </MenuItem>
-      </>
-    );
-    //console.log("user is there");
-  }
+  // if (!user) {
+  //   // user is logged out
+  //   UserBody = () => (
+  //     <>
+  //       <MenuItem button onClick={() => router.push("/login")}>
+  //         Login
+  //       </MenuItem>
+  //       <MenuItem button onClick={() => router.push("/register")}>
+  //         Register
+  //       </MenuItem>
+  //     </>
+  //   );
+  //   //console.log("not logged in");
+  // } else {
+  //   // user is logged in
+  //   UserBody = () => (
+  //     <>
+  //       <MenuItem button onClick={() => router.push("/account")}>
+  //         My account
+  //       </MenuItem>
+  //       <MenuItem>{user?.username}</MenuItem>
+  //       <MenuItem
+  //         onClick={() => {
+  //           localStorage.removeItem("qid");
+  //           router.replace("/login");
+  //         }}
+  //       >
+  //         Logout
+  //       </MenuItem>
+  //     </>
+  //   );
+  //   //console.log("user is there");
+  // }
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -248,15 +247,15 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             className={classes.accountIcon}
             onClick={handleProfileMenuOpen}
           >
-            {error ? <ErrorIcon color="error" /> : <AccountCircle />}
-
-            {fetching && (
+            {/* {error ? <ErrorIcon color="error" /> : <AccountCircle />} */}
+            <AccountCircle />
+            {/* {fetching && (
               <CircularProgress
                 size={30}
                 thickness={3}
                 className={classes.authProgress}
               />
-            )}
+            )} */}
           </IconButton>
         </Toolbar>
         {renderMenu}

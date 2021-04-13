@@ -1,9 +1,9 @@
-import { IconButton, Snackbar } from "@material-ui/core";
+import { Snackbar } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import CloseIcon from "@material-ui/icons/Close";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { motion } from "framer-motion";
+import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
@@ -17,11 +17,18 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Index: React.FC = () => {
+const Index: NextPage = () => {
   const classes = useStyles();
-  const { isLoading, isError, data, error } = useQuery("todos", fetchProducts, {
-    retry: 1,
-  });
+  const { isLoading, isError, data, error, status } = useQuery(
+    "products",
+    fetchProducts,
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  console.log("this status >>>>", status);
 
   const [open, setOpen] = React.useState(true);
 

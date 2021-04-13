@@ -1,9 +1,0 @@
-query Me($token: String!) {
-  me(token: $token) {
-    username
-    email
-    id
-    createdAt
-    password
-  }
-}

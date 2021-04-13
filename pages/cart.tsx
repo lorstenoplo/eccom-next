@@ -1,20 +1,13 @@
-import { Box } from "@material-ui/core";
 import { motion } from "framer-motion";
-import { withUrqlClient } from "next-urql";
 import Head from "next/head";
 import React from "react";
-import {
-  CartProduct,
-  Layout,
-  CartOption,
-  CartOptionsSection,
-} from "../components";
+import { CartOptionsSection, CartProduct, Layout } from "../components";
 import { useStateValue } from "../context/StateProvider";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
-import ScrollToTop from "../utils/ScrollToTop";
 import useStyles from "../mui-styles/Cart_Styles";
+import ScrollToTop from "../utils/ScrollToTop";
+import { NextPage } from "next";
 
-const Cart: React.FC = () => {
+const cart: NextPage = () => {
   const { state } = useStateValue();
   const classes = useStyles();
   const stagger = {
@@ -50,4 +43,4 @@ const Cart: React.FC = () => {
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: false })(Cart);
+export default cart;

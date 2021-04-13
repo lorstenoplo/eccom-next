@@ -1,3 +1,0 @@
-mutation Report($username: String!, $problem: String!) {
-  report(username: $username, problem: $problem)
-}

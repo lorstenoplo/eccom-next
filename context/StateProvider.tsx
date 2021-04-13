@@ -8,6 +8,7 @@ import {
 export const initialState: ContextDefaultType = {
   basket: [],
   user: null,
+  qKey: ["pro", 1],
 };
 
 // Prepares the dataLayer

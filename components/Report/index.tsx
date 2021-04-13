@@ -26,7 +26,7 @@ import ReportIcon from "@material-ui/icons/Report";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import React, { useState } from "react";
 import { useReportMutation } from "../../src/generated/graphql";
-import useGetUser from "../../utils/useGetUser";
+// import useGetUser from "../../utils/useGetUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +58,7 @@ const Report: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
   const [{ data, error, fetching }, report] = useReportMutation();
-  const [user] = useGetUser();
+  // const [user] = useGetUser();
 
   if (error) {
     return <p>{error.message}</p>;
@@ -74,7 +74,7 @@ const Report: React.FC = () => {
 
   const sendReport = () => {
     if (input.trim()) {
-      report({ username: user?.username || "", problem: input });
+      // report({ username: user?.username || "", problem: input });
       data?.report && handleClose();
     }
   };

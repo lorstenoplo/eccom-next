@@ -1,9 +1,0 @@
-query Products {
-  products {
-    id
-    title
-    price
-    rating
-    imageURL
-  }
-}
