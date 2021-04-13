@@ -1,6 +1,4 @@
 import React from "react";
-import { withUrqlClient } from "next-urql";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
 import { motion } from "framer-motion";
 import useStyles from "../mui-styles/Account_Styles";
 import Head from "next/head";
@@ -20,16 +18,11 @@ const account = () => {
       <Head>{/* <title>GoLoop Account | {user?.username}</title> */}</Head>
       <Layout navColor="#FAFAFA" className={classes.page}>
         {/* hi {user?.username} */}
-        <Button
-          onClick={() => deleteUser({ email: user?.email as string })}
-          disabled={!user || fetching}
-        >
-          Delete account
-        </Button>
+        <Button>Delete account</Button>
         {/* {error && <p>{error.message}</p>} */}
       </Layout>
     </motion.div>
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: false })(account);
+export default account;

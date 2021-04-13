@@ -12,8 +12,6 @@ import React from "react";
 import InputField from "../components/InputField";
 import { useLoginMutation } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
-import { withUrqlClient } from "next-urql";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -115,4 +113,4 @@ const Login: React.FC<loginProps> = () => {
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: false })(Login);
+export default Login;
