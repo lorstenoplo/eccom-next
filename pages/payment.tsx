@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Cards from "react-credit-cards";
-import { withUrqlClient } from "next-urql";
-import { CreateUrqlClient } from "../utils/createUrqlClient";
 import { motion } from "framer-motion";
 import "react-credit-cards/es/styles-compiled.css";
 import { Layout } from "../components";
@@ -156,4 +154,4 @@ const payment = () => {
   );
 };
 
-export default withUrqlClient(CreateUrqlClient, { ssr: true })(payment);
+export default payment;
