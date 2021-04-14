@@ -12,11 +12,11 @@ function MyApp({ Component, pageProps, router }: any) {
     <StateProvider initialState={initialState} reducer={reducer}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+       <QueryClientProvider client={queryClient}>
         <AnimatePresence exitBeforeEnter>
-          <QueryClientProvider client={queryClient}>
             <Component key={router.route} {...pageProps} />
-          </QueryClientProvider>
         </AnimatePresence>
+       </QueryClientProvider>
       </ThemeProvider>
     </StateProvider>
   );
