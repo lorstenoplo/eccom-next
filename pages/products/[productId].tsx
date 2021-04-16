@@ -89,6 +89,7 @@ const ProductPage: NextPage<{ productId: string }> = ({ productId }) => {
     >
       <Head>
         <title>{data?.title || "Loading..."}</title>
+        <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
 
       <motion.div
@@ -111,7 +112,13 @@ const ProductPage: NextPage<{ productId: string }> = ({ productId }) => {
         <motion.div className={classes.InfoContInner} variants={stagger}>
           <motion.div className={classes.topCont} variants={fadeInUp}>
             <Link scroll={false} href="/">
-              <Button style={{ textTransform: "none" }} href="/">
+              <Button
+                style={{
+                  textTransform: "none",
+                  transform: "translateX(-6px)",
+                }}
+                href="/"
+              >
                 Back to products
               </Button>
             </Link>

@@ -11,6 +11,7 @@ import {
   useScrollTrigger,
   Zoom,
   CircularProgress,
+  Box,
 } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
@@ -25,6 +26,7 @@ import { Props } from "../../types/HomePageProps";
 import SideBar from "../SideBar";
 import { green, blue } from "@material-ui/core/colors";
 import ErrorIcon from "@material-ui/icons/Error";
+import Image from "next/image";
 interface NavbarProps {
   color?: string;
 }
@@ -209,13 +211,16 @@ const Navbar: React.FC<NavbarProps> = (props) => {
           </SideBar>
           <NextLink href="/">
             <a className={classes.title}>
-              <img
-                style={{ marginRight: 8 }}
-                src="/logo.png"
-                alt="logo"
-                height="22px"
-                width="23px"
-              />
+              <Box display="flex" alignItems="center" mr={1.5}>
+                <Image
+                  src="/logo.png"
+                  alt="logo"
+                  height="22px"
+                  width="23px"
+                  layout="fixed"
+                  priority={true}
+                />
+              </Box>
               <Typography variant="h6">GoLoop</Typography>
             </a>
           </NextLink>
