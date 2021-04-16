@@ -5,7 +5,7 @@ const queryCache = new QueryCache({
     console.log(error);
   },
 });
-console.log(queryCache);
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

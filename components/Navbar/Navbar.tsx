@@ -44,7 +44,8 @@ export const useStyles = makeStyles(
         display: "none",
         color: "black",
         [theme.breakpoints.up("md")]: {
-          display: "block",
+          display: "flex",
+          alignItems: "center",
         },
       },
       searchIcon: {
@@ -208,7 +209,14 @@ const Navbar: React.FC<NavbarProps> = (props) => {
           </SideBar>
           <NextLink href="/">
             <a className={classes.title}>
-              <Typography variant="h6">Go Loop Shopping</Typography>
+              <img
+                style={{ marginRight: 8 }}
+                src="/logo.png"
+                alt="logo"
+                height="22px"
+                width="23px"
+              />
+              <Typography variant="h6">GoLoop</Typography>
             </a>
           </NextLink>
 

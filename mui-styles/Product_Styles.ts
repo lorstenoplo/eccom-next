@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   img: {
     height: "80%",
     maxWidth: "500px",
+    [theme.breakpoints.up("lg")]: {
+      height: "60%",
+    },
   },
   topCont: {
     width: "90%",

@@ -111,7 +111,9 @@ const ProductPage: NextPage<{ productId: string }> = ({ productId }) => {
         <motion.div className={classes.InfoContInner} variants={stagger}>
           <motion.div className={classes.topCont} variants={fadeInUp}>
             <Link scroll={false} href="/">
-              <a>Back to products</a>
+              <Button style={{ textTransform: "none" }} href="/">
+                Back to products
+              </Button>
             </Link>
             <Tooltip TransitionComponent={Zoom} title="Your Cart">
               <IconButton
