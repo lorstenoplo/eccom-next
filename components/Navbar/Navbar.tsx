@@ -20,7 +20,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { cloneElement, useEffect } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 import { useStateValue } from "../../context/StateProvider";
 import { Props } from "../../types/HomePageProps";
 import SideBar from "../SideBar";
@@ -138,16 +138,23 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { state } = useStateValue();
   // const [user, fetching, error] = useGetUser();
   const router = useRouter();
-  let token: any;
+  const [token, setToken] = useState<string>("");
 
   useEffect(() => {
-    token = localStorage.getItem("qid");
+    setToken(localStorage.getItem("qid") || "");
   }, []);
 
-  const { data, isLoading, isError } = useQuery(["me", token], async () => {
-    const data = await me(token!);
-    return data;
-  });
+  const { data, isLoading, isError } = useQuery(
+    ["me", token],
+    async () => {
+      const data = await me(token!);
+      return data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    }
+  );
 
   // if (error) return <p>{error.message}</p>;
 
