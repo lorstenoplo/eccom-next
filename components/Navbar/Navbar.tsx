@@ -159,7 +159,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   // if (error) return <p>{error.message}</p>;
 
   let UserBody = () => <></>;
-  if (!data.user) {
+  if (!data?.user) {
     // user is logged out
     UserBody = () => (
       <>
