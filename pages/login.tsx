@@ -14,6 +14,8 @@ import { useLoginMutation } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import login from "../api-functions/mutations/login";
+import { useMutation } from "react-query";
 
 interface Values {
   email: string;
@@ -24,7 +26,7 @@ interface loginProps {}
 
 const Login: React.FC<loginProps> = () => {
   const router = useRouter();
-  const [, login] = useLoginMutation();
+  const mutation = useMutation(login);
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
@@ -38,11 +40,11 @@ const Login: React.FC<loginProps> = () => {
             password: "",
           }}
           onSubmit={async (values, { setErrors }) => {
-            const response = await login(values);
-            const user = response.data?.login.user;
-            const token = response.data?.login.token;
-            if (response.data?.login.errors) {
-              setErrors(toErrorMap(response.data.login.errors));
+            const response = await mutation.mutateAsync(values);
+            const user = response.user;
+            const token = response.token;
+            if (response.errors) {
+              setErrors(toErrorMap(response.errors));
             } else if (user && token) {
               localStorage.setItem("qid", token);
               router.replace("/");

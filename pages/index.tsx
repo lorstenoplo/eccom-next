@@ -28,8 +28,6 @@ const Index: NextPage = () => {
     }
   );
 
-  console.log("this status >>>>", status);
-
   const [open, setOpen] = React.useState(true);
 
   const handleClose = (_event?: React.SyntheticEvent, reason?: string) => {

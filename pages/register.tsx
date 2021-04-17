@@ -10,10 +10,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import InputField from "../components/InputField";
-import { useRegisterMutation } from "../src/generated/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useMutation } from "react-query";
+import register from "../api-functions/mutations/register";
 
 interface Values {
   email: string;
@@ -24,7 +25,7 @@ interface registerProps {}
 
 const Register: React.FC<registerProps> = () => {
   const router = useRouter();
-  const [, register] = useRegisterMutation();
+  const mutation = useMutation(register);
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
@@ -39,11 +40,11 @@ const Register: React.FC<registerProps> = () => {
             password: "",
           }}
           onSubmit={async (values, { setErrors }) => {
-            const response = await register(values);
-            const user = response.data?.register.user;
-            const token = response.data?.register.token;
-            if (response.data?.register.errors) {
-              setErrors(toErrorMap(response.data.register.errors));
+            const response = await mutation.mutateAsync(values);
+            const user = response.user;
+            const token = response.token;
+            if (response.errors) {
+              setErrors(toErrorMap(response.errors));
             } else if (user && token) {
               localStorage.setItem("qid", token);
               router.replace("/");
