@@ -28,6 +28,7 @@ const Index: NextPage = () => {
   const [open, setOpen] = React.useState(true);
   const [askOpen, setAskOpen] = React.useState(true);
   const [user, isLoadingUser, isErroredUser] = useGetUser();
+
   const handleClose = (_event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
@@ -57,9 +58,9 @@ const Index: NextPage = () => {
       </Head>
       <Layout className={classes.body}>
         <motion.div variants={stagger}>
-          {(!isLoadingUser || !isErroredUser) && !user && (
+          {!isLoadingUser && !user ? (
             <AskToLogin askOpen={askOpen} setAskOpen={setAskOpen} />
-          )}
+          ) : null}
           <Box
             mx="auto"
             justifyContent="space-between"
