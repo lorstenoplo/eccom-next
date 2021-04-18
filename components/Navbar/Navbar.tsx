@@ -29,6 +29,7 @@ import ErrorIcon from "@material-ui/icons/Error";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import me from "../../api-functions/queries/me";
+import useGetUser from "../../utils/useGetUser";
 interface NavbarProps {
   color?: string;
 }
@@ -144,22 +145,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
     setToken(localStorage.getItem("qid") || "");
   }, []);
 
-  const { data, isLoading, isError } = useQuery(
-    ["me", token],
-    async () => {
-      const data = await me(token!);
-      return data;
-    },
-    {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    }
-  );
-
-  // if (error) return <p>{error.message}</p>;
+  const [user, isLoading, isError] = useGetUser();
 
   let UserBody = () => <></>;
-  if (!data?.user) {
+  if (!user) {
     // user is logged out
     UserBody = () => (
       <>
@@ -179,7 +168,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         <MenuItem button onClick={() => router.push("/account")}>
           My account
         </MenuItem>
-        <MenuItem>{data.user?.username}</MenuItem>
+        <MenuItem>{user?.username}</MenuItem>
         <MenuItem
           onClick={() => {
             localStorage.removeItem("qid");

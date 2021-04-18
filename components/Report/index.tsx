@@ -24,8 +24,10 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import ReportIcon from "@material-ui/icons/Report";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import React, { useState } from "react";
-import { useReportMutation } from "../../src/generated/graphql";
+import React, { useEffect, useState } from "react";
+import { useMutation, useQuery } from "react-query";
+import sendReportToApi from "../../api-functions/mutations/sendReport";
+import me from "../../api-functions/queries/me";
 // import useGetUser from "../../utils/useGetUser";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,12 +59,38 @@ const Report: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
-  const [{ data, error, fetching }, report] = useReportMutation();
+  // const [{ data, error, fetching }, report] = useReportMutation();
   // const [user] = useGetUser();
 
-  if (error) {
-    return <p>{error.message}</p>;
-  }
+  const [token, setToken] = useState<string>("");
+
+  useEffect(() => {
+    setToken(localStorage.getItem("qid") || "");
+  }, []);
+
+  const { data, isLoading, isError } = useQuery(
+    ["me", token],
+    async () => {
+      const data = await me(token!);
+      return data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    }
+  );
+
+  const values = {
+    to: "nishanthdipali@gmail.com",
+    from: data?.user.username,
+    text: input,
+  };
+
+  const mutation = useMutation(sendReportToApi);
+
+  // if (error) {
+  //   return <p>{error.message}</p>;
+  // }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -72,10 +100,13 @@ const Report: React.FC = () => {
     setOpen(false);
   };
 
-  const sendReport = () => {
+  const sendReport = async () => {
     if (input.trim()) {
-      // report({ username: user?.username || "", problem: input });
-      data?.report && handleClose();
+      const res = await mutation.mutateAsync(values);
+
+      if (res.report) {
+        handleClose();
+      }
     }
   };
 
@@ -109,23 +140,25 @@ const Report: React.FC = () => {
               Report a Problem
             </Typography>
             <Tooltip
-              title={fetching ? "Wait" : "Send your report"}
+              title={mutation.isLoading ? "Wait" : "Send your report"}
               TransitionComponent={Zoom}
             >
-              <Button
-                disabled={fetching}
-                autoFocus
-                color="inherit"
-                onClick={sendReport}
-              >
-                {fetching ? (
-                  <Box mt={1} color="#ffffff">
-                    <CircularProgress size="25px" color="inherit" />
-                  </Box>
-                ) : (
-                  <SendRoundedIcon />
-                )}
-              </Button>
+              <span>
+                <Button
+                  disabled={mutation.isLoading}
+                  autoFocus
+                  color="inherit"
+                  onClick={sendReport}
+                >
+                  {mutation.isLoading ? (
+                    <Box mt={1} color="#ffffff">
+                      <CircularProgress size="25px" color="inherit" />
+                    </Box>
+                  ) : (
+                    <SendRoundedIcon />
+                  )}
+                </Button>
+              </span>
             </Tooltip>
           </Toolbar>
         </AppBar>
@@ -143,7 +176,7 @@ const Report: React.FC = () => {
             multiline
           />
           <FormHelperText id="component-error-text">
-            {error && <p>{(error as any).message}</p>}
+            {mutation.isError && <p>{(mutation.error as any).message}</p>}
           </FormHelperText>
         </DialogContent>
         <List style={{ flex: 1 }}>

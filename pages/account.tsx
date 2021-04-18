@@ -9,59 +9,39 @@ import { useDeleteUserMutation } from "../src/generated/graphql";
 import { useMutation, useQuery } from "react-query";
 import { AUTH_API_BASE_URL } from "../utils/constants";
 import me from "../api-functions/queries/me";
+import deleteUser from "../api-functions/mutations/deleteUser";
+import useGetUser from "../utils/useGetUser";
 
 const account = () => {
   const classes = useStyles();
-  // const [user] = useGetUser();
-  const [token, setToken] = useState<string>("");
-
-  useEffect(() => {
-    setToken(localStorage.getItem("qid") || "");
-  }, []);
-
-  const { data, isLoading, isError } = useQuery(
-    ["me", token],
-    async () => {
-      const data = await me(token!);
-      return data;
-    },
-    {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    }
-  );
+  const [user, isLoading, isError] = useGetUser();
 
   const values = {
-    username: data?.user.username,
-    email: data?.user.email,
+    username: user?.username,
+    email: user?.email,
   };
 
-  // const [{ data, error, fetching }, deleteUser] = useDeleteUserMutation();
-  const mutation = useMutation(async (values: any) => {
-    const res = await fetch(`${AUTH_API_BASE_URL}/delete`, {
-      method: "POST",
-      body: JSON.stringify(values),
-    });
+  const dynamicTitle = isLoading || !user ? "" : `| ${user?.username}`;
 
-    return res.json();
-  });
+  const mutation = useMutation(deleteUser);
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Head>
-        {/* <title>GoLoop Account | {user?.username}</title> */}
-        GoLoop Account
+        <title>GoLoop Account {dynamicTitle}</title>
       </Head>
       <Layout navColor="#FAFAFA" className={classes.page}>
-        {/* hi {user?.username} */}
+        <p>Hello, {user?.username}</p>
         <Button
           onClick={async () => {
             const res = await mutation.mutateAsync(values);
             console.log("del >>>", res);
           }}
+          disabled={isLoading || isError || !user}
         >
           Delete account
         </Button>
         {mutation.isError && <p>{(mutation.error as any).message}</p>}
+        {mutation.isLoading && <p>loading</p>}
       </Layout>
     </motion.div>
   );
