@@ -24,11 +24,10 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import ReportIcon from "@material-ui/icons/Report";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import React, { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import React, { useState } from "react";
+import { useMutation } from "react-query";
 import sendReportToApi from "../../api-functions/mutations/sendReport";
-import me from "../../api-functions/queries/me";
-// import useGetUser from "../../utils/useGetUser";
+import useGetUser from "../../utils/useGetUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,38 +58,15 @@ const Report: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
-  // const [{ data, error, fetching }, report] = useReportMutation();
-  // const [user] = useGetUser();
-
-  const [token, setToken] = useState<string>("");
-
-  useEffect(() => {
-    setToken(localStorage.getItem("qid") || "");
-  }, []);
-
-  const { data, isLoading, isError } = useQuery(
-    ["me", token],
-    async () => {
-      const data = await me(token!);
-      return data;
-    },
-    {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-    }
-  );
+  const [user, isLoading, isError] = useGetUser();
 
   const values = {
     to: "nishanthdipali@gmail.com",
-    from: data?.user.username,
+    from: user?.username,
     text: input,
   };
 
   const mutation = useMutation(sendReportToApi);
-
-  // if (error) {
-  //   return <p>{error.message}</p>;
-  // }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -145,7 +121,7 @@ const Report: React.FC = () => {
             >
               <span>
                 <Button
-                  disabled={mutation.isLoading}
+                  disabled={mutation.isLoading || isLoading || isError || !user}
                   autoFocus
                   color="inherit"
                   onClick={sendReport}

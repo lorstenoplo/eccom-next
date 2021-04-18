@@ -9,9 +9,10 @@ import Link from "next/link";
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchProducts } from "../api-functions/queries/fetchProducts";
-import { Layout, Product } from "../components";
+import { Layout, Product, AskToLogin } from "../components";
 import useStyles from "../mui-styles/Home_Styles";
 import ScrollToTop from "../utils/ScrollToTop";
+import useGetUser from "../utils/useGetUser";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -19,17 +20,14 @@ function Alert(props: AlertProps) {
 
 const Index: NextPage = () => {
   const classes = useStyles();
-  const { isLoading, isError, data, error, status } = useQuery(
-    "products",
-    fetchProducts,
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { isLoading, isError, data } = useQuery("products", fetchProducts, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
 
   const [open, setOpen] = React.useState(true);
-
+  const [askOpen, setAskOpen] = React.useState(true);
+  const [user, isLoadingUser, isErroredUser] = useGetUser();
   const handleClose = (_event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
@@ -59,6 +57,9 @@ const Index: NextPage = () => {
       </Head>
       <Layout className={classes.body}>
         <motion.div variants={stagger}>
+          {(!isLoadingUser || !isErroredUser) && !user && (
+            <AskToLogin askOpen={askOpen} setAskOpen={setAskOpen} />
+          )}
           <Box
             mx="auto"
             justifyContent="space-between"

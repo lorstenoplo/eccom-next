@@ -1,6 +1,8 @@
 import {
   AppBar,
   Badge,
+  Box,
+  CircularProgress,
   IconButton,
   InputBase,
   Menu,
@@ -10,26 +12,22 @@ import {
   Typography,
   useScrollTrigger,
   Zoom,
-  CircularProgress,
-  Box,
 } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
+import ErrorIcon from "@material-ui/icons/Error";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { cloneElement, useEffect, useState } from "react";
+import React, { cloneElement } from "react";
 import { useStateValue } from "../../context/StateProvider";
 import { Props } from "../../types/HomePageProps";
-import SideBar from "../SideBar";
-import { green, blue } from "@material-ui/core/colors";
-import ErrorIcon from "@material-ui/icons/Error";
-import Image from "next/image";
-import { useQuery } from "react-query";
-import me from "../../api-functions/queries/me";
 import useGetUser from "../../utils/useGetUser";
+import SideBar from "../SideBar";
 interface NavbarProps {
   color?: string;
 }
@@ -135,16 +133,8 @@ const ElevationScroll = (props: Props) => {
 const Navbar: React.FC<NavbarProps> = (props) => {
   const classes = useStyles(props);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
   const { state } = useStateValue();
-  // const [user, fetching, error] = useGetUser();
   const router = useRouter();
-  const [token, setToken] = useState<string>("");
-
-  useEffect(() => {
-    setToken(localStorage.getItem("qid") || "");
-  }, []);
-
   const [user, isLoading, isError] = useGetUser();
 
   let UserBody = () => <></>;
