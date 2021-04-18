@@ -37,6 +37,10 @@ const AskToLogin: React.FC<Props> = ({ askOpen, setAskOpen }) => {
           </IconButton>
         }
         title="You are not logged in!"
+        titleTypographyProps={{
+          variant: "h3",
+          style: { fontSize: "1.375rem", fontWeight: 500 },
+        }}
       />
       <CardContent className={classes.content}>
         <Box

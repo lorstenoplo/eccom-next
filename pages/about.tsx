@@ -66,7 +66,7 @@ const about = () => {
                 disableElevation
                 color="primary"
                 size="large"
-                onClick={() => router.push("/test")}
+                onClick={() => router.push("/")}
               >
                 Get Started
               </Button>
