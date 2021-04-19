@@ -55,6 +55,10 @@ const Index: NextPage = () => {
       <Head>
         <title>GoLoop</title>
         <link rel="icon" href="/logo.png" type="image/png" />
+        <meta
+          name="description"
+          content="Best eccomerce site on the planet"
+        ></meta>
       </Head>
       <Layout className={classes.body}>
         <motion.div variants={stagger}>

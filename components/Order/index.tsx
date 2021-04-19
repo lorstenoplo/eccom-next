@@ -67,10 +67,12 @@ const Order: React.FC<Props> = ({ order }) => {
       </Menu>
       {basket.map((p, i) => (
         <div key={i} className={classes.productCont}>
-          <img className={classes.productImage} src={p.imageURL} />
+          <div className={classes.imgCont}>
+            <img className={classes.productImage} src={p.imageURL} />
+          </div>
           <div className={classes.productInfo}>
-            <h3 style={{ fontSize: "1.3rem" }}>{p.title}</h3>
-            <p style={{ fontWeight: "bold" }}>${p.price}</p>
+            <h3 className={classes.productTitle}>{p.title}</h3>
+            <p className={classes.productPrice}>${p.price}</p>
             <div className={classes.ratingCont}>
               {Array(p.rating)
                 .fill(null)
@@ -87,7 +89,7 @@ const Order: React.FC<Props> = ({ order }) => {
         </div>
       ))}
       <div className={classes.orderInfo}>
-        <h3 className={classes.id}>Order Id: ${id}</h3>
+        <h3 className={classes.id}>Order Id: {id}</h3>
         <h3 className={classes.total}>Order Total: ${amount}</h3>
       </div>
     </Card>

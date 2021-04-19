@@ -17,26 +17,38 @@ const useStyles = makeStyles((theme: Theme) =>
     order: {
       padding: 30,
       marginBottom: 20,
+      marginTop: 20,
       paddingTop: 5,
     },
     productCont: {
       display: "flex",
-      marginBottom: 20,
+      marginBottom: 30,
+      marginTop: 20,
     },
     productInfo: {
       paddingLeft: 40,
       flex: 0.7,
       [theme.breakpoints.down("md")]: {
-        flex: 1,
+        flex: 0.8,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingLeft: 50,
+        alignItems: "flex-start",
       },
     },
     productImage: {
       objectFit: "contain",
       height: "180px",
-      flex: 0.2,
       [theme.breakpoints.down("md")]: {
         height: "100px",
       },
+    },
+    imgCont: {
+      flex: 0.2,
+      display: "grid",
+      placeItems: "center",
+      width: "20%",
     },
     header: {
       paddingLeft: 20,
@@ -59,6 +71,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     star: {
       color: "#DAA520",
+    },
+    productTitle: {
+      fontSize: "1.3rem",
+      [theme.breakpoints.down("md")]: {
+        margin: 5,
+      },
+    },
+    productPrice: {
+      fontWeight: "bold",
+      [theme.breakpoints.down("md")]: {
+        margin: 2,
+      },
     },
   })
 );

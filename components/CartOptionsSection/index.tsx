@@ -133,7 +133,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           marginTop: "20px",
         }}
       >
-        SubTotal: ${getBasketTotal(state.basket)}
+        SubTotal ({state.basket.length} items) : ${getBasketTotal(state.basket)}
       </h5>
       <Box
         mt={1}
