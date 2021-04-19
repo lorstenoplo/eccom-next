@@ -22,6 +22,7 @@ const cart: NextPage = () => {
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Head>
         <title>Cart | Review your items in cart</title>
+        <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
       <Layout navColor="#fff" className={classes.page}>
         <motion.div className={classes.productsContainer} variants={stagger}>

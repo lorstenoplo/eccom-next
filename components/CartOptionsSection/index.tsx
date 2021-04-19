@@ -1,20 +1,54 @@
 import React from "react";
 import { CartOptionsSectionPropsType } from "./types";
 import CartOption from "../CartOption";
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, CircularProgress } from "@material-ui/core";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import AlternateEmailRoundedIcon from "@material-ui/icons/AlternateEmailRounded";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-// import useGetUser from "../../utils/useGetUser";
+import useGetUser from "../../utils/useGetUser";
 import PersonPinCircleOutlinedIcon from "@material-ui/icons/PersonPinCircleOutlined";
 import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import useStyles from "./styles";
+import { useRouter } from "next/router";
+import { getBasketTotal } from "../../context/reducer";
+import { useStateValue } from "../../context/StateProvider";
+import { db } from "../../utils/firebase";
+import firebase from "firebase/app";
 
 const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
-  // const [user] = useGetUser();
+  const [user, isLoading, isError] = useGetUser();
+  const [loading, setLoading] = React.useState<boolean>(false);
   const classes = useStyles();
+  const { state } = useStateValue();
+  const router = useRouter();
+
+  if (isLoading || isError) {
+    return null;
+  }
+
+  const placeOrder = async () => {
+    setLoading(true);
+    try {
+      await db
+        .collection("users")
+        .doc(user?._id)
+        .collection("orders")
+        .add({
+          basket: state.basket,
+          amount: getBasketTotal(state.basket),
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+    } catch (err) {
+      console.dir(err);
+      setLoading(false);
+    }
+
+    setLoading(false);
+    router.push("/orders");
+  };
+
   return (
     <Box className={classes.container}>
       <CartOption>
@@ -32,7 +66,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
             <AlternateEmailRoundedIcon fontSize="small" />
           </Box>
           <CartOption.SubTitle>
-            {/* {user?.username || "guest"}@gmail.com */}
+            {user?.email || "guest@gmail.com"}
           </CartOption.SubTitle>
         </CartOption.Info>
       </CartOption>
@@ -50,8 +84,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           <Box color="rgb(117 0 245)" mr={1}>
             <AccountCircleOutlinedIcon fontSize="small" />
           </Box>
-          <CartOption.SubTitle>me</CartOption.SubTitle>
-          {/* <CartOption.SubTitle>{user?.username}</CartOption.SubTitle> */}
+          <CartOption.SubTitle>{user?.username}</CartOption.SubTitle>
         </CartOption.Info>
         <CartOption.Info>
           <Box color="rgb(117 0 245)" mr={1}>
@@ -91,6 +124,17 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           <CartOption.SubTitle>Used shipping address</CartOption.SubTitle>
         </CartOption.Info>
       </CartOption>
+      <h5
+        style={{
+          fontSize: "1.2rem",
+          fontWeight: 500,
+          alignSelf: "flex-start",
+          margin: "5px",
+          marginTop: "20px",
+        }}
+      >
+        SubTotal: ${getBasketTotal(state.basket)}
+      </h5>
       <Box
         mt={1}
         className={classes.btnCont}
@@ -104,8 +148,17 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           variant="contained"
           disableElevation
           style={{ textTransform: "none" }}
+          onClick={placeOrder}
+          disabled={loading || !user || state.basket.length === 0}
         >
           Place Your Order
+          {loading && (
+            <CircularProgress
+              style={{ marginLeft: 10 }}
+              size={15}
+              color="primary"
+            />
+          )}
         </Button>
       </Box>
     </Box>

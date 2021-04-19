@@ -33,6 +33,7 @@ const Login: React.FC<loginProps> = () => {
       <Container maxWidth="xs">
         <Head>
           <title>Login | Welcome back</title>
+          <link rel="icon" href="/logo.png" type="image/png" />
         </Head>
         <Formik
           initialValues={{

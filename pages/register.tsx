@@ -32,6 +32,7 @@ const Register: React.FC<registerProps> = () => {
       <Container maxWidth="xs">
         <Head>
           <title>Register | Start Purchasing</title>
+          <link rel="icon" href="/logo.png" type="image/png" />
         </Head>
         <Formik
           initialValues={{

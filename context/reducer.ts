@@ -2,6 +2,9 @@ import { Reducer } from "react";
 import { Actions } from "./types/StateProviderPropstype";
 import { ContextDefaultType } from "./types/defaultValue";
 
+export const getBasketTotal = (basket: any) =>
+  basket?.reduce((amount: number, item: any) => item.price + amount, 0);
+
 export const reducer: Reducer<ContextDefaultType, Actions> = (
   state,
   action
