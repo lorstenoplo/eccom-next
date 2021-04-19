@@ -19,6 +19,7 @@
     "formik-material-ui": "^3.0.1",
     "framer-motion": "^3.2.2-rc.1",
     "graphql": "^15.5.0",
+    "moment": "^2.29.1",
     "next": "10.0.6",
     "next-urql": "^2.2.0",
     "react": "17.0.1",

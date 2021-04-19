@@ -1,23 +1,24 @@
 import { NextPage } from "next";
 import { motion } from "framer-motion";
 import Head from "next/head";
-import { Layout, LoadingScreen } from "../components";
+import { Layout, LoadingScreen, Order } from "../components";
 import useGetUser from "../utils/useGetUser";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase";
+import useStyles from "../components/Order/mui-styles";
+import ScrollToTop from "../utils/ScrollToTop";
 
 const orders: NextPage = () => {
   const [user, isLoading, isError] = useGetUser();
   const [orders, setOrders] = useState<any>([]);
-  const router = useRouter();
+  const classes = useStyles();
 
   useEffect(() => {
     if (user) {
       db.collection("users")
         .doc(user._id)
         .collection("orders")
-        .orderBy("created", "desc")
+        .orderBy("createdAt", "desc")
         .onSnapshot((snapshot) =>
           setOrders(
             snapshot.docs.map((doc) => ({
@@ -29,32 +30,31 @@ const orders: NextPage = () => {
     }
   }, [user]);
 
-  console.log(orders);
-
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   if (isError) {
-    return <p>somethind went wrong</p>;
-  }
-
-  if (!user && !isLoading) {
-    router.replace("/login");
+    return (
+      <motion.p initial="initial" animate="animate" exit={{ opacity: 0 }}>
+        something went wrong
+      </motion.p>
+    );
   }
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Head>
-        <title>Your Orders</title>
+        <title>Orders and Returns</title>
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
-      <Layout className="">
-        <h1>Your Orders</h1>
-        {orders.map((order: any) => (
-          <p>{order.amount}</p>
+      <Layout className={classes.page}>
+        <h1 className={classes.title}>Your Orders</h1>
+        {orders.map((order: any, i: number) => (
+          <Order key={i} order={order} />
         ))}
       </Layout>
+      <ScrollToTop />
     </motion.div>
   );
 };

@@ -10,3 +10,4 @@ export { default as CartProduct } from "./CartProduct";
 export { default as CartOption } from "./CartOption";
 export { default as CartOptionsSection } from "./CartOptionsSection";
 export { default as AskToLogin } from "./AskToLogin";
+export { default as Order } from "./Order";

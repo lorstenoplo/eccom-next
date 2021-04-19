@@ -1,6 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import me from "../api-functions/queries/me";
+import { User } from "../types/User";
+
+type getUserHookType<T> = [T | undefined, boolean, boolean];
+
+type getUserHookReturnType = getUserHookType<User>;
 
 const useGetUser = () => {
   const [token, setToken] = useState<string>("");
@@ -21,11 +26,11 @@ const useGetUser = () => {
     }
   );
 
-  const user = data?.user;
+  const user: User = data?.user;
 
-  const resArray: any = [user, isLoading, isError];
+  const resArray: getUserHookReturnType = [user, isLoading, isError];
 
-  return useMemo<any>(() => resArray, resArray);
+  return useMemo<getUserHookReturnType>(() => resArray, resArray);
 };
 
 export default useGetUser;
