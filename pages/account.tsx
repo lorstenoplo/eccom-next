@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import useStyles from "../mui-styles/Account_Styles";
-import Head from "next/head";
-// import useGetUser from "../utils/useGetUser";
-import { Layout } from "../components";
 import { Button } from "@material-ui/core";
-import { useDeleteUserMutation } from "../src/generated/graphql";
-import { useMutation, useQuery } from "react-query";
-import { AUTH_API_BASE_URL } from "../utils/constants";
-import me from "../api-functions/queries/me";
+import { motion } from "framer-motion";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React from "react";
+import { useMutation } from "react-query";
 import deleteUser from "../api-functions/mutations/deleteUser";
+import { Layout } from "../components";
+import useStyles from "../mui-styles/Account_Styles";
 import useGetUser from "../utils/useGetUser";
 
 const account = () => {
   const classes = useStyles();
   const [user, isLoading, isError] = useGetUser();
+  const { replace } = useRouter();
 
   const values = {
     username: user?.username,
@@ -35,6 +33,8 @@ const account = () => {
           onClick={async () => {
             const res = await mutation.mutateAsync(values);
             console.log("del >>>", res);
+            localStorage.removeItem("qid");
+            replace("/login");
           }}
           disabled={isLoading || isError || !user}
         >
