@@ -1,12 +1,12 @@
-import { NextPage } from "next";
 import { motion } from "framer-motion";
+import { NextPage } from "next";
 import Head from "next/head";
-import { Layout, LoadingScreen, Order } from "../components";
-import useGetUser from "../utils/useGetUser";
 import { useEffect, useState } from "react";
-import { db } from "../utils/firebase";
+import { Layout, LoadingScreen, Order } from "../components";
 import useStyles from "../components/Order/mui-styles";
+import { db } from "../utils/firebase";
 import ScrollToTop from "../utils/ScrollToTop";
+import useGetUser from "../utils/useGetUser";
 
 const orders: NextPage = () => {
   const [user, isLoading, isError] = useGetUser();
@@ -19,13 +19,15 @@ const orders: NextPage = () => {
         .doc(user._id)
         .collection("orders")
         .orderBy("createdAt", "desc")
-        .onSnapshot((snapshot) =>
-          setOrders(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
-          )
+        .onSnapshot(
+          (snapshot) =>
+            setOrders(
+              snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+              }))
+            ),
+          (err) => alert(err.message)
         );
     }
   }, [user]);

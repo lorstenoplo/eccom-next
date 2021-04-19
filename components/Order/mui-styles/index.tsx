@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
     productInfo: {
       paddingLeft: 40,
       flex: 0.7,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "flex-start",
       [theme.breakpoints.down("md")]: {
         flex: 0.8,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
         paddingLeft: 50,
-        alignItems: "flex-start",
       },
     },
     productImage: {
@@ -74,6 +74,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     productTitle: {
       fontSize: "1.3rem",
+      marginBottom: 10,
+      margin: 0,
       [theme.breakpoints.down("md")]: {
         margin: 5,
       },

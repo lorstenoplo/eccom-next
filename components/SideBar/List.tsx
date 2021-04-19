@@ -16,6 +16,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import ReportIcon from "@material-ui/icons/Report";
 import { useRouter } from "next/router";
 import Report from "../Report";
+import NewReleasesRoundedIcon from "@material-ui/icons/NewReleasesRounded";
 // import useGetUser from "../../utils/useGetUser";
 import LoadingScreen from "../LoadingScreen";
 
@@ -88,6 +89,12 @@ const CustomList: React.FC<listProps> = ({ classes }) => {
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary="About" />
+        </ListItem>
+        <ListItem button onClick={() => router.push("/new")}>
+          <ListItemIcon>
+            <NewReleasesRoundedIcon />
+          </ListItemIcon>
+          <ListItemText primary="New" />
         </ListItem>
         <Report />
       </List>

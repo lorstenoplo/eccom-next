@@ -65,6 +65,17 @@ const useStyles = makeStyles(
       link: {
         "-webkit-tap-highlight-color": "transparent",
       },
+      categoryCont: {
+        width: "80%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        [theme.breakpoints.up("md")]: {
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          columnGap: 100,
+        },
+      },
     } as const)
 );
 

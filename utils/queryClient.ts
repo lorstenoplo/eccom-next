@@ -12,9 +12,7 @@ export const queryClient = new QueryClient({
       retry: false,
       staleTime: 60 * 1000 * 5,
       onError: (e) => {
-        if ("message" in (e as Error)) {
-          console.log((e as Error).message);
-        }
+        console.log(e);
       },
     },
   },
