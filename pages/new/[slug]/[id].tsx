@@ -7,12 +7,11 @@ import { useStateValue } from "../../../context/StateProvider";
 import { LoadingScreen } from "../../../components";
 import { motion } from "framer-motion";
 import Head from "next/head";
-import Link from "next/link";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Button, Tooltip, Zoom, IconButton, Badge } from "@material-ui/core";
 
 const pg: NextPage<{ id: string }> = ({ id }) => {
-  const { push } = useRouter();
+  const { push, back } = useRouter();
 
   const { isLoading, isError, data, error } = useQuery(
     ["product", id],
@@ -111,17 +110,16 @@ const pg: NextPage<{ id: string }> = ({ id }) => {
       <div className={classes.InfoCont}>
         <motion.div className={classes.InfoContInner} variants={stagger}>
           <motion.div className={classes.topCont} variants={fadeInUp}>
-            <Link scroll={false} href="/new">
-              <Button
-                style={{
-                  textTransform: "none",
-                  transform: "translateX(-6px)",
-                }}
-                href="/new"
-              >
-                Back to products
-              </Button>
-            </Link>
+            <Button
+              style={{
+                textTransform: "none",
+                transform: "translateX(-6px)",
+              }}
+              onClick={back}
+            >
+              Back to products
+            </Button>
+
             <Tooltip TransitionComponent={Zoom} title="Your Cart">
               <IconButton
                 aria-label="cart"

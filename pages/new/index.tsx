@@ -32,6 +32,11 @@ const newIndex: NextPage = () => {
             src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
             href="/new/food"
           />
+          <Category
+            title="Juices"
+            src="https://images.unsplash.com/photo-1544619371-2aacd756277d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80"
+            href="/new/juices"
+          />
         </Box>
       </Layout>
     </motion.div>
