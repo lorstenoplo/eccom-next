@@ -10,13 +10,13 @@ import useStyles from "../../../mui-styles/Home_Styles";
 import { API_BASE_URL } from "../../../utils/constants";
 import ScrollToTop from "../../../utils/ScrollToTop";
 
-const newIndex: NextPage<{ category: string }> = ({ category }) => {
+const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
   const classes = useStyles();
 
   const { data, isError, isLoading, error } = useQuery(
-    category!,
+    slug!,
     async () => {
-      const res = await fetch(`${API_BASE_URL}/productsByCategory/${category}`);
+      const res = await fetch(`${API_BASE_URL}/productsBySlug/${slug}`);
       return res.json();
     },
     {
@@ -43,11 +43,11 @@ const newIndex: NextPage<{ category: string }> = ({ category }) => {
       exit={{ opacity: 0 }}
     >
       <Head>
-        <title>Shop for {category}</title>
+        <title>Shop for {slug}</title>
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
       <Layout className={classes.body}>
-        <h1>{category}</h1>
+        <h1 className={classes.categoryTitle}>{slug}</h1>
         <motion.div variants={stagger}>
           <Box
             mx="auto"
@@ -77,11 +77,12 @@ const newIndex: NextPage<{ category: string }> = ({ category }) => {
             {data?.products?.map((p: any, i: number) => (
               <Link
                 scroll={false}
-                href="/new/[category]/[id]"
-                as={`/new/${category}/${p._id}`}
+                href="/new/[slug]/[id]"
+                as={`/new/${slug}/${p._id}`}
               >
                 <a className={classes.link}>
                   <Product
+                    category={p.category}
                     imageURL={p.imageURL}
                     title={p.title}
                     id={p._id}
@@ -101,7 +102,7 @@ const newIndex: NextPage<{ category: string }> = ({ category }) => {
 
 newIndex.getInitialProps = ({ query }) => {
   return {
-    category: query.category as string,
+    slug: query.slug as string,
   };
 };
 

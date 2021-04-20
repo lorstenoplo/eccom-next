@@ -16,6 +16,7 @@ const useStyles = makeStyles(
         flexDirection: "row",
         paddingRight: "56px !important",
         paddingLeft: "56px !important",
+        paddingBottom: "10px !important",
         [theme.breakpoints.down("md")]: {
           paddingLeft: "0px !important",
           paddingRight: "0px !important",
@@ -66,15 +67,19 @@ const useStyles = makeStyles(
         "-webkit-tap-highlight-color": "transparent",
       },
       categoryCont: {
-        width: "80%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
         [theme.breakpoints.up("md")]: {
-          width: "100%",
+          width: "90%",
           display: "grid",
           gridTemplateColumns: "repeat(2, 1fr)",
-          columnGap: 100,
+          columnGap: 80,
         },
+      },
+      categoryTitle: {
+        textAlign: "center",
+        textTransform: "capitalize",
       },
     } as const)
 );

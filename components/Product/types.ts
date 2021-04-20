@@ -4,4 +4,5 @@ export type ProductProps = {
   title: string | undefined;
   price: number | undefined;
   rating: number | undefined;
+  category?: string | undefined;
 };

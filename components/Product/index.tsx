@@ -4,7 +4,12 @@ import useStyles from "../../mui-styles/Home_Styles";
 import { fadeInUp } from "../../utils/staggerAnimationHelper";
 import { ProductProps } from "./types";
 
-const Product: React.FC<ProductProps> = ({ imageURL, price, title }) => {
+const Product: React.FC<ProductProps> = ({
+  imageURL,
+  price,
+  title,
+  category = "Category",
+}) => {
   const classes = useStyles();
   return (
     <motion.div
@@ -13,7 +18,7 @@ const Product: React.FC<ProductProps> = ({ imageURL, price, title }) => {
       variants={fadeInUp}
       className={classes.product}
     >
-      <p className={classes.proCat}>Category</p>
+      <p className={classes.proCat}>{category}</p>
       <motion.img
         initial={{ x: 60, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
