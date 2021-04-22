@@ -9,9 +9,17 @@ import { Layout, Product } from "../../../components";
 import useStyles from "../../../mui-styles/Home_Styles";
 import { API_BASE_URL } from "../../../utils/constants";
 import ScrollToTop from "../../../utils/ScrollToTop";
+import { useEffect } from "react";
 
 const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
+  }, []);
 
   const { data, isError, isLoading, error } = useQuery(
     slug!,

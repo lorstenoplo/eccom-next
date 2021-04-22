@@ -13,7 +13,7 @@ const Category: FC<Props> = ({ href, src, title }) => {
   const classes = useStyles();
   return (
     <Box mb={2}>
-      <Link href={href}>
+      <Link scroll={false} href={href}>
         <Button href={href}>
           <Box display="flex" flexDirection="column" alignItems="center">
             <img src={src} className={classes.img} />

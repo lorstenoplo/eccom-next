@@ -11,6 +11,7 @@ const useStyles = makeStyles(
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#f1f3f5",
+        width: "100vw",
       },
       body: {
         flexDirection: "row",
