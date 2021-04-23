@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "grid",
       placeItems: "center",
       width: "20%",
+      [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+        flex: 0.4,
+      },
     },
     header: {
       paddingLeft: 20,
