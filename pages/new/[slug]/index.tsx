@@ -55,7 +55,9 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
       <Layout className={classes.body}>
-        <h1 className={classes.categoryTitle}>{slug}</h1>
+        <Box display="flex">
+          <h1 className={classes.categoryTitle}>{slug}</h1>
+        </Box>
         <motion.div variants={stagger}>
           <Box
             mx="auto"

@@ -68,6 +68,7 @@ const useStyles = makeStyles(
       },
       link: {
         "-webkit-tap-highlight-color": "transparent",
+        overflow: "hidden",
       },
       categoryCont: {
         width: "100%",
@@ -81,7 +82,8 @@ const useStyles = makeStyles(
         },
       },
       categoryTitle: {
-        textAlign: "center",
+        marginLeft: "auto",
+        marginRight: "auto",
         textTransform: "capitalize",
       },
     } as const)
