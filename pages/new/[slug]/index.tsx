@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
@@ -55,7 +55,12 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
       <Layout className={classes.body}>
-        <Box display="flex">
+        <Box alignItems="center" position="relative" display="flex">
+          <Link href="/new">
+            <Button href="/new" className={classes.back}>
+              Back
+            </Button>
+          </Link>
           <h1 className={classes.categoryTitle}>{slug}</h1>
         </Box>
         <motion.div variants={stagger}>

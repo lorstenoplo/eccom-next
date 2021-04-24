@@ -86,6 +86,12 @@ const useStyles = makeStyles(
         marginRight: "auto",
         textTransform: "capitalize",
       },
+      back: {
+        position: "absolute",
+        left: -6,
+        textTransform: "none",
+        color: "rgba(0,0,0,0.7)",
+      },
     } as const)
 );
 
