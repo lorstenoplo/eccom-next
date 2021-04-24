@@ -4,7 +4,6 @@ import {
   Box,
   CircularProgress,
   IconButton,
-  InputBase,
   Menu,
   MenuItem,
   Toolbar,
@@ -18,7 +17,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import ErrorIcon from "@material-ui/icons/Error";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -28,6 +26,10 @@ import { useStateValue } from "../../context/StateProvider";
 import { Props } from "../../types/HomePageProps";
 import useGetUser from "../../utils/useGetUser";
 import SideBar from "../SideBar";
+import CustomSearchBar from "../Search/SearchBar";
+import algoliasearch from "algoliasearch";
+import { InstantSearch } from "react-instantsearch-dom";
+import SearchOverlay from "../Search/SearchOverlay";
 interface NavbarProps {
   color?: string;
 }
@@ -76,7 +78,7 @@ export const useStyles = makeStyles(
         [theme.breakpoints.up("sm")]: {
           width: "20ch",
           "&:focus": {
-            width: "70ch",
+            width: "50ch",
             backgroundColor: "#ffffff",
             boxShadow:
               "0 1px 2px 0 rgba(60,64,67,0.3),0 1px 3px 1px rgba(60,64,67,0.15)",
@@ -133,9 +135,17 @@ const ElevationScroll = (props: Props) => {
 const Navbar: React.FC<NavbarProps> = (props) => {
   const classes = useStyles(props);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [focused, setFocused] = React.useState(false);
   const { state } = useStateValue();
   const router = useRouter();
   const [user, isLoading, isError] = useGetUser();
+  const NEXT_PUBLIC_ALGOLIA_APPID = process.env.NEXT_PUBLIC_ALGOLIA_APPID;
+  const NEXT_PUBLIC_ALGOLIA_KEY = process.env.NEXT_PUBLIC_ALGOLIA_KEY;
+
+  const searchClient = algoliasearch(
+    NEXT_PUBLIC_ALGOLIA_APPID!,
+    NEXT_PUBLIC_ALGOLIA_KEY!
+  );
 
   let UserBody = () => <></>;
   if (!user) {
@@ -220,21 +230,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               <Typography variant="h6">GoLoop</Typography>
             </a>
           </NextLink>
-
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon color="inherit" />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-
+          <InstantSearch searchClient={searchClient} indexName="products">
+            <CustomSearchBar setFocused={setFocused} />
+            {focused && <SearchOverlay />}
+          </InstantSearch>
           <Tooltip TransitionComponent={Zoom} title="Your Cart">
             <IconButton
               aria-label="cart"
@@ -251,7 +250,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
 
           <IconButton
             aria-label="account of current user"
-            aria-controls="menu-appbar"
+            aria-controls={menuId}
             aria-haspopup="true"
             className={classes.accountIcon}
             onClick={handleProfileMenuOpen}

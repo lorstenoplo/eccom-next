@@ -7,13 +7,14 @@ import useStyles from "../../mui-styles/Home_Styles";
 
 const newIndex: NextPage = () => {
   const classes = useStyles();
+
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Head>
         <title>New version of goloop</title>
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
-      <Layout className="">
+      <Layout navColor="#FAFAFA" className="">
         <h1 style={{ textAlign: "center" }}>Shop by Categories</h1>
         <Box className={classes.categoryCont}>
           <Category
