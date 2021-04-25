@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Box } from "@material-ui/core";
 import Link from "next/link";
+import useStyles from "./mui-styles";
 
 type Props = {
   result: {
@@ -17,6 +18,7 @@ type Props = {
 const Result: FC<Props> = ({
   result: { title, imageURL, rating, price, _id },
 }) => {
+  const classes = useStyles();
   return (
     <Link href="/products/[productId]" as={`/products/${_id}`}>
       <a>
@@ -25,7 +27,8 @@ const Result: FC<Props> = ({
           justifyContent="space-evenly"
           display="flex"
           my={1.5}
-          className="result"
+          py={0.5}
+          className={classes.result}
         >
           <Box
             bgcolor="lightgray"
@@ -37,24 +40,22 @@ const Result: FC<Props> = ({
             py={1}
             borderRadius={8}
           >
-            <img
-              height="100px"
-              style={{ objectFit: "contain" }}
-              src={imageURL}
-              alt={title}
-            />
+            <img src={imageURL} alt={title} className={classes.img} />
           </Box>
           <Box
             flex={0.5}
             display="flex"
             flexDirection="column"
             justifyContent="center"
-            className="sub"
+            className={classes.infoCont}
           >
-            <h4 style={{ margin: 0, marginBottom: 8 }}>{title}</h4>
+            <h4 className={classes.title}>{title}</h4>
             <p style={{ margin: 0 }}>${price}</p>
           </Box>
-          <p className="sub">Rating: {rating}</p>
+          <p className={classes.rating}>
+            Rating:
+            {rating}
+          </p>
         </Box>
       </a>
     </Link>
