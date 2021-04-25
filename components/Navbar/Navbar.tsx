@@ -31,6 +31,7 @@ import algoliasearch from "algoliasearch";
 import { InstantSearch } from "react-instantsearch-dom";
 import SearchOverlay from "../Search/SearchOverlay";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import HoverdCart from "../HoverdCart";
 
 interface NavbarProps {
   color?: string;
@@ -254,6 +255,8 @@ const Navbar: React.FC<NavbarProps> = (props) => {
               </Badge>
             </IconButton>
           </Tooltip>
+
+          <HoverdCart />
 
           <IconButton
             aria-label="account of current user"

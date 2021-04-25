@@ -52,10 +52,7 @@ const Result: FC<Props> = ({
             <h4 className={classes.title}>{title}</h4>
             <p style={{ margin: 0 }}>${price}</p>
           </Box>
-          <p className={classes.rating}>
-            Rating:
-            {rating}
-          </p>
+          <p className={classes.rating}>Rating : {rating}</p>
         </Box>
       </a>
     </Link>

@@ -12,3 +12,4 @@ export { default as CartOptionsSection } from "./CartOptionsSection";
 export { default as AskToLogin } from "./AskToLogin";
 export { default as Order } from "./Order";
 export { default as Category } from "./Category";
+export { default as HoverdCart } from "./HoverdCart";
