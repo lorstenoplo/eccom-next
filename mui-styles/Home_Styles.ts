@@ -68,7 +68,9 @@ const useStyles = makeStyles(
       },
       link: {
         "-webkit-tap-highlight-color": "transparent",
-        overflow: "hidden",
+        [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+          overflow: "hidden",
+        },
       },
       categoryCont: {
         width: "100%",
