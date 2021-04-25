@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Box } from "@material-ui/core";
 import Link from "next/link";
-import useStyles from "./mui-styles";
 
 type Props = {
   result: {
@@ -18,7 +17,6 @@ type Props = {
 const Result: FC<Props> = ({
   result: { title, imageURL, rating, price, _id },
 }) => {
-  const classes = useStyles();
   return (
     <Link href="/products/[productId]" as={`/products/${_id}`}>
       <a>
@@ -27,7 +25,6 @@ const Result: FC<Props> = ({
           justifyContent="space-evenly"
           display="flex"
           my={1.5}
-          px={1}
           className="result"
         >
           <Box

@@ -16,7 +16,6 @@ const SearchBar = (props: any) => {
         placeholder="Search…"
         type="search"
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,

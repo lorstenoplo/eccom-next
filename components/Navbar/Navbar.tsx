@@ -30,6 +30,8 @@ import CustomSearchBar from "../Search/SearchBar";
 import algoliasearch from "algoliasearch";
 import { InstantSearch } from "react-instantsearch-dom";
 import SearchOverlay from "../Search/SearchOverlay";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
 interface NavbarProps {
   color?: string;
 }
@@ -139,13 +141,14 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { state } = useStateValue();
   const router = useRouter();
   const [user, isLoading, isError] = useGetUser();
-  const NEXT_PUBLIC_ALGOLIA_APPID = process.env.NEXT_PUBLIC_ALGOLIA_APPID;
-  const NEXT_PUBLIC_ALGOLIA_KEY = process.env.NEXT_PUBLIC_ALGOLIA_KEY;
+  const APPID = process.env.NEXT_PUBLIC_ALGOLIA_APPID;
+  const ALGOLIA_KEY = process.env.NEXT_PUBLIC_ALGOLIA_KEY;
 
-  const searchClient = algoliasearch(
-    NEXT_PUBLIC_ALGOLIA_APPID!,
-    NEXT_PUBLIC_ALGOLIA_KEY!
-  );
+  const searchClient = algoliasearch(APPID!, ALGOLIA_KEY!);
+
+  const handleClickAway = () => {
+    setFocused(false);
+  };
 
   let UserBody = () => <></>;
   if (!user) {
@@ -231,8 +234,12 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             </a>
           </NextLink>
           <InstantSearch searchClient={searchClient} indexName="products">
-            <CustomSearchBar setFocused={setFocused} />
-            {focused && <SearchOverlay />}
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <div>
+                <CustomSearchBar setFocused={setFocused} />
+                {focused && <SearchOverlay />}
+              </div>
+            </ClickAwayListener>
           </InstantSearch>
           <Tooltip TransitionComponent={Zoom} title="Your Cart">
             <IconButton

@@ -1,11 +1,8 @@
 import { connectHits } from "react-instantsearch-dom";
 import { Box } from "@material-ui/core";
 import Result from "./Result";
-import useStyles from "./mui-styles";
 
 const CustomHits = ({ hits }: any) => {
-  console.log("hits >>>", hits);
-  const classes = useStyles();
   return (
     <Box
       position="absolute"
@@ -17,6 +14,7 @@ const CustomHits = ({ hits }: any) => {
       height="300px"
       width="62ch"
       className="search_cont"
+      px={1}
     >
       {hits.map((hit: any) => (
         <Result key={hit.objectID} result={hit} />
