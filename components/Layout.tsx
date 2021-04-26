@@ -18,7 +18,9 @@ const Layout: React.FC<LayoutProps> = ({
     <div style={{ width: "100%" }}>
       <Navbar color={navColor} />
       <Toolbar id="back-to-top-anchor" />
-      <Container {...restProps}>{children}</Container>
+      <Container style={{ marginBottom: 24 }} {...restProps}>
+        {children}
+      </Container>
       <Footer />
     </div>
   );

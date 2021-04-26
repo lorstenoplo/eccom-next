@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: 15,
       display: "flex",
       justifyContent: "space-evenly",
-      marginTop: 24,
       [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
         display: "grid",
         paddingRight: 0,

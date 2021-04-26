@@ -96,6 +96,19 @@ const pg: NextPage<{ id: string }> = ({ id }) => {
         initial={{ opacity: 0 }}
         className={classes.imageCont}
       >
+        <div
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            backgroundColor: "#FAFAFA",
+            borderRadius: "50%",
+            height: 20,
+            width: 20,
+          }}
+        >
+          {"<"}
+        </div>
         <motion.img
           src={data?.imageURL}
           alt={data?.title || "error"}
