@@ -88,6 +88,22 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
+  back: {
+    display: "none",
+    [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+      position: "absolute",
+      top: "10px",
+      left: "10px",
+      backgroundColor: "#FAFAFA",
+      borderRadius: "50%",
+      height: 25,
+      width: 25,
+      display: "grid",
+      placeItems: "center",
+      fontWeight: "bold",
+      cursor: "pointer",
+    },
+  },
 }));
 
 export default useStyles;

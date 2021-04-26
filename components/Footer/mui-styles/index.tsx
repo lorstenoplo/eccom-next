@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
         paddingRight: 0,
         gridTemplateColumns: "1fr 1fr",
         paddingLeft: 30,
+        paddingTop: 30,
+        paddingBottom: 30,
       },
     },
     link: {
