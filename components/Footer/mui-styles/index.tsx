@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: 15,
       display: "flex",
       justifyContent: "space-evenly",
+      marginTop: 24,
       [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
         display: "grid",
         paddingRight: 0,
@@ -25,6 +26,19 @@ const useStyles = makeStyles((theme: Theme) =>
     section: {
       [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
         marginBottom: 10,
+      },
+    },
+    footer2: {
+      position: "absolute",
+      left: 0,
+      bottom: -50,
+      paddingRight: 80,
+      paddingTop: 15,
+      paddingBottom: 15,
+      [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+        bottom: -80,
+        paddingRight: 100,
+        paddingLeft: 10,
       },
     },
   })
