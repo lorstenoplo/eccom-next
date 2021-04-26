@@ -256,7 +256,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
             </IconButton>
           </Tooltip>
 
-          <HoverdCart />
+          {/* <HoverdCart /> */}
 
           <IconButton
             aria-label="account of current user"
