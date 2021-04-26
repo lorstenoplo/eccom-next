@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme: Theme) =>
         paddingTop: 30,
         paddingBottom: 30,
       },
+      [theme.breakpoints.down(theme.breakpoints.values.xs)]: {
+        flexDirection: "column",
+        display: "flex",
+      },
     },
     link: {
       marginBottom: 5,

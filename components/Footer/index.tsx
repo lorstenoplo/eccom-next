@@ -7,7 +7,11 @@ import StayConnected from "./Sections/StayConnected";
 import Support from "./Sections/Support";
 import QuickLinks from "./Sections/QuickLinks";
 
-const Footer: FC = () => {
+type Props = {
+  notFoundPage?: boolean;
+};
+
+const Footer: FC<Props> = ({ notFoundPage = false }) => {
   const classes = useStyles();
   return (
     <Box
@@ -24,21 +28,23 @@ const Footer: FC = () => {
       <StayConnected />
       <Support />
       <QuickLinks />
-      <Box
-        width="100%"
-        bgcolor="white"
-        borderTop="1px solid lightgray"
-        className={classes.footer2}
-      >
-        <Typography
-          variant="body1"
-          color="textSecondary"
-          style={{ textAlign: "center" }}
+      {!notFoundPage && (
+        <Box
+          width="100%"
+          bgcolor="white"
+          borderTop="1px solid lightgray"
+          className={classes.footer2}
         >
-          Copyright 2021, GoLoop. All Rights Reserved ( Except we don't sell
-          Products )
-        </Typography>
-      </Box>
+          <Typography
+            variant="body1"
+            color="textSecondary"
+            style={{ textAlign: "center" }}
+          >
+            Copyright 2021, GoLoop. All Rights Reserved ( Except we don't sell
+            Products )
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

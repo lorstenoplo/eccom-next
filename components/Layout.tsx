@@ -7,21 +7,23 @@ type LayoutProps = {
   children: NonNullable<React.ReactNode>;
   className: string;
   navColor?: string;
+  notFoundPage?: boolean;
 };
 
 const Layout: React.FC<LayoutProps> = ({
   children,
   navColor,
+  notFoundPage,
   ...restProps
 }) => {
   return (
     <div style={{ width: "100%" }}>
       <Navbar color={navColor} />
       <Toolbar id="back-to-top-anchor" />
-      <Container style={{ marginBottom: 24 }} {...restProps}>
+      <Container style={{ paddingBottom: 24 }} {...restProps}>
         {children}
       </Container>
-      <Footer />
+      <Footer notFoundPage={notFoundPage} />
     </div>
   );
 };
