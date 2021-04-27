@@ -20,7 +20,17 @@ const CustomHits = ({ hits }: any) => {
       {hits.map((hit: any) => (
         <Result key={hit.objectID} result={hit} />
       ))}
-      <Image src="/algolia.svg" width={200} height={50} />
+      <Box py={1} justifyContent="flex-end" width="100%" display="flex">
+        <a href="https://algolia.com" target="_algolia">
+          <Image
+            src="/algolia.svg"
+            priority={true}
+            alt="Search by Algolia"
+            width={130}
+            height={18}
+          />
+        </a>
+      </Box>
     </Box>
   );
 };
