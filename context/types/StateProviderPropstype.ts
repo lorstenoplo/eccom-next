@@ -1,6 +1,5 @@
 import { Reducer, Dispatch } from "react";
 import { ContextDefaultType } from "./defaultValue";
-import { Product, MeQuery } from "../../src/generated/graphql";
 
 export interface Actions {
   type: string;
