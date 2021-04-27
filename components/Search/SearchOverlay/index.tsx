@@ -1,6 +1,7 @@
 import { connectHits } from "react-instantsearch-dom";
 import { Box } from "@material-ui/core";
 import Result from "./Result";
+import Image from "next/image";
 
 const CustomHits = ({ hits }: any) => {
   return (
@@ -19,6 +20,7 @@ const CustomHits = ({ hits }: any) => {
       {hits.map((hit: any) => (
         <Result key={hit.objectID} result={hit} />
       ))}
+      <Image src="/algolia.svg" width={200} height={50} />
     </Box>
   );
 };

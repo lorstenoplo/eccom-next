@@ -9,6 +9,7 @@ export interface Product {
   price: number;
   rating: number;
   title: string;
+  category: string;
 }
 
 export interface OrderType {

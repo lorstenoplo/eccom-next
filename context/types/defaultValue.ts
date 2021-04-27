@@ -1,7 +1,8 @@
-import { MeQuery, Product } from "../../src/generated/graphql";
+import { User } from "../../types/User";
+import { Product } from "../../components/Order/types";
 
 export type ContextDefaultType = {
-  user: MeQuery["me"];
+  user: User;
   basket: Array<Product>;
   qKey: any;
 };

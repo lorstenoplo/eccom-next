@@ -1,16 +1,16 @@
+import { Box, Button, TextField } from "@material-ui/core";
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Cards from "react-credit-cards";
-import { motion } from "framer-motion";
 import "react-credit-cards/es/styles-compiled.css";
 import { Layout } from "../components";
-import Head from "next/head";
+import useStyles from "../mui-styles/Payment_Styles";
 import {
   formatCreditCardNumber,
-  formatExpirationDate,
   formatCVC,
+  formatExpirationDate,
 } from "../utils/cardDataValidaters";
-import { TextField, Box, Button, CircularProgress } from "@material-ui/core";
-import useStyles from "../mui-styles/Payment_Styles";
+import CustomHead from "../utils/CustomHead";
 
 type cardStateType = {
   cvc: React.ReactText;
@@ -69,9 +69,7 @@ const payment = () => {
       exit={{ opacity: 0 }}
       id="PaymentForm"
     >
-      <Head>
-        <title>Payment | Add a payment method to get started</title>
-      </Head>
+      <CustomHead title="Payment | Add a payment method to get started" />
       <Layout className={classes.page}>
         <Cards
           cvc={cardState.cvc}

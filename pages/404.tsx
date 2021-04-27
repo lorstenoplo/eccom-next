@@ -1,27 +1,16 @@
-import { NextPage } from "next";
-import { motion } from "framer-motion";
-import Head from "next/head";
-import { Layout } from "../components";
-import useStyles from "../mui-styles/404_Styles";
 import { Box, Typography } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { motion } from "framer-motion";
+import { NextPage } from "next";
+import { Layout } from "../components";
+import useStyles from "../mui-styles/404_Styles";
+import CustomHead from "../utils/CustomHead";
 
 const page: NextPage = () => {
   const classes = useStyles();
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <Head>
-        <title>404 | Page not found | GoLoop</title>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <meta
-          name="description"
-          content="Best eccomerce site on the planet"
-        ></meta>
-        <meta
-          property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/goloop-storage.appspot.com/o/loading.png?alt=media&token=d883ec3c-f3c7-428f-a7cb-354ab2c8c73d"
-        ></meta>
-      </Head>
+      <CustomHead title="404 | Page not found | GoLoop" />
       <Layout notFoundPage navColor="white" className={classes.page}>
         <Box
           width="100%"

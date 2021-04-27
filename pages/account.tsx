@@ -1,12 +1,12 @@
 import { Button } from "@material-ui/core";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { useMutation } from "react-query";
 import deleteUser from "../api-functions/mutations/deleteUser";
 import { Layout } from "../components";
 import useStyles from "../mui-styles/Account_Styles";
+import CustomHead from "../utils/CustomHead";
 import useGetUser from "../utils/useGetUser";
 
 const account = () => {
@@ -24,9 +24,7 @@ const account = () => {
   const mutation = useMutation(deleteUser);
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <Head>
-        <title>GoLoop Account {dynamicTitle}</title>
-      </Head>
+      <CustomHead title={`GoLoop Account ${dynamicTitle}`} />
       <Layout navColor="#FAFAFA" className={classes.page}>
         <p>Hello, {user?.username}</p>
         <Button

@@ -1,5 +1,4 @@
 import React from "react";
-import { Product } from "../../src/generated/graphql";
 import { motion } from "framer-motion";
 import { Box, Tooltip, Zoom, IconButton } from "@material-ui/core";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
@@ -7,6 +6,7 @@ import { useStateValue } from "../../context/StateProvider";
 import { fadeInUp } from "../../utils/staggerAnimationHelper";
 import truncate from "../../utils/truncate";
 import useStyles from "../../mui-styles/Cart_Styles";
+import { Product } from "../Order/types";
 
 const CartProduct: React.FC<Product> = ({ id, imageURL, title, price }) => {
   const { dispatch } = useStateValue();

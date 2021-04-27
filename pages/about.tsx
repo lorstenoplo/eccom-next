@@ -1,10 +1,10 @@
-import React from "react";
-import { Typography, Button, Box } from "@material-ui/core";
-import { Layout } from "../components";
+import { Box, Button, Typography } from "@material-ui/core";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import { useRouter } from "next/router";
+import React from "react";
+import { Layout } from "../components";
 import useStyles from "../mui-styles/About_Styles";
+import CustomHead from "../utils/CustomHead";
 
 const about = () => {
   const router = useRouter();
@@ -37,9 +37,7 @@ const about = () => {
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <Head>
-        <title>About</title>
-      </Head>
+      <CustomHead title="About | GoLoop" />
       <Layout navColor="#fafafa" className={classes.page}>
         <motion.div className={classes.textCont} variants={stagger}>
           <motion.div variants={fadeInUp}>

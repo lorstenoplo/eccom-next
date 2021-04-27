@@ -13,6 +13,7 @@ import { Layout, Product, AskToLogin } from "../components";
 import useStyles from "../mui-styles/Home_Styles";
 import ScrollToTop from "../utils/ScrollToTop";
 import useGetUser from "../utils/useGetUser";
+import CustomHead from "../utils/CustomHead";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -52,18 +53,7 @@ const Index: NextPage = () => {
       exit={{ opacity: 0 }}
       className={classes.container}
     >
-      <Head>
-        <title>GoLoop</title>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <meta
-          name="description"
-          content="Best eccomerce site on the planet"
-        ></meta>
-        <meta
-          property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/goloop-storage.appspot.com/o/loading.png?alt=media&token=d883ec3c-f3c7-428f-a7cb-354ab2c8c73d"
-        ></meta>
-      </Head>
+      <CustomHead title="GoLoop" />
       <Layout className={classes.body}>
         <motion.div variants={stagger}>
           {!isLoadingUser && !user ? (

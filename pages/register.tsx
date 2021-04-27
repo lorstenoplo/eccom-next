@@ -6,15 +6,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Form, Formik } from "formik";
-import Head from "next/head";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import InputField from "../components/InputField";
-import { toErrorMap } from "../src/utils/toErrorMap";
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { useMutation } from "react-query";
 import register from "../api-functions/mutations/register";
+import InputField from "../components/InputField";
+import CustomHead from "../utils/CustomHead";
+import { toErrorMap } from "../utils/toErrorMap";
 
 interface Values {
   email: string;
@@ -30,10 +30,7 @@ const Register: React.FC<registerProps> = () => {
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <Container maxWidth="xs">
-        <Head>
-          <title>Register | Start Purchasing</title>
-          <link rel="icon" href="/logo.png" type="image/png" />
-        </Head>
+        <CustomHead title="Register | Start Purchasing" />
         <Formik
           initialValues={{
             email: "",

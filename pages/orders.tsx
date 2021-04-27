@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { NextPage } from "next";
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Layout, LoadingScreen, Order } from "../components";
 import useStyles from "../components/Order/mui-styles";
+import CustomHead from "../utils/CustomHead";
 import { db } from "../utils/firebase";
 import ScrollToTop from "../utils/ScrollToTop";
 import useGetUser from "../utils/useGetUser";
@@ -46,10 +46,7 @@ const orders: NextPage = () => {
 
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <Head>
-        <title>Orders and Returns</title>
-        <link rel="icon" href="/logo.png" type="image/png" />
-      </Head>
+      <CustomHead title="Orders and Returns" />
       <Layout className={classes.page}>
         <h1 className={classes.title}>Your Orders</h1>
         {orders.map((order: any, i: number) => (
