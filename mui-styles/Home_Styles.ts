@@ -94,6 +94,24 @@ const useStyles = makeStyles(
         textTransform: "none",
         color: "rgba(0,0,0,0.7)",
       },
+      img: {
+        width: 580,
+        position: "absolute",
+        right: 0,
+        top: 64,
+        objectFit: "contain",
+        zIndex: 10,
+      },
+      wlcmTitle: {
+        fontSize: 30,
+      },
+      main: {
+        // background:
+        //   "linear-gradient(194.01deg, #D9E8EF 9.6%, #DCEAF0 22.94%, #EAF2F5 89.64%);",
+        [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+          display: "none",
+        },
+      },
     } as const)
 );
 

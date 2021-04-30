@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
     <div style={{ width: "100%" }}>
       <Navbar color={navColor} />
       <Toolbar id="back-to-top-anchor" />
-      <Container style={{ paddingBottom: 24 }} {...restProps}>
+      <Container maxWidth={false} style={{ paddingBottom: 24 }} {...restProps}>
         {children}
       </Container>
       <Footer notFoundPage={notFoundPage} />

@@ -1,5 +1,5 @@
 import { connectHits } from "react-instantsearch-dom";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import Result from "./Result";
 import Image from "next/image";
 
@@ -20,6 +20,17 @@ const CustomHits = ({ hits }: any) => {
       {hits.map((hit: any) => (
         <Result key={hit.objectID} result={hit} />
       ))}
+      {hits.length === 0 && (
+        <Box
+          height="250px"
+          width="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography variant="h6">No matching results found!</Typography>
+        </Box>
+      )}
       <Box py={1} justifyContent="flex-end" width="100%" display="flex">
         <a href="https://algolia.com" target="_algolia">
           <Image
