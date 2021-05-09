@@ -1,24 +1,20 @@
-import React, { useState } from "react";
 import {
+  Divider,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
-  List,
   Typography,
 } from "@material-ui/core";
-import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import AccountCircleRoundedIcon from "@material-ui/icons/AccountCircleRounded";
-import ShopIcon from "@material-ui/icons/Shop";
 import HelpIcon from "@material-ui/icons/Help";
+import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import InfoIcon from "@material-ui/icons/Info";
 import PaymentIcon from "@material-ui/icons/Payment";
-import ReportIcon from "@material-ui/icons/Report";
+import ShopIcon from "@material-ui/icons/Shop";
 import { useRouter } from "next/router";
+import React from "react";
 import Report from "../Report";
-import NewReleasesRoundedIcon from "@material-ui/icons/NewReleasesRounded";
-// import useGetUser from "../../utils/useGetUser";
-import LoadingScreen from "../LoadingScreen";
 
 type listProps = {
   toggleDrawer: (
@@ -29,23 +25,9 @@ type listProps = {
 
 const CustomList: React.FC<listProps> = ({ classes }) => {
   const router = useRouter();
-  // const [user, fetching, error] = useGetUser();
-
-  // if (fetching) {
-  //   return <LoadingScreen />;
-  // }
-
-  // if (error) {
-  //   return <p color="red">{error.message}</p>;
-  // }
 
   return (
-    <div
-      className={classes.list}
-      role="presentation"
-      // onClick={toggleDrawer(false)}
-      //onKeyDown={toggleDrawer(false)}
-    >
+    <div className={classes.list} role="presentation">
       <List>
         <Typography variant="h4" style={{ padding: "5px 15px" }}>
           Go Loop
@@ -89,12 +71,6 @@ const CustomList: React.FC<listProps> = ({ classes }) => {
             <InfoIcon />
           </ListItemIcon>
           <ListItemText primary="About" />
-        </ListItem>
-        <ListItem button onClick={() => router.push("/new")}>
-          <ListItemIcon>
-            <NewReleasesRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="New" />
         </ListItem>
         <Report />
       </List>

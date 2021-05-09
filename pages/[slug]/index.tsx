@@ -11,7 +11,10 @@ import { API_BASE_URL } from "../../utils/constants";
 import ScrollToTop from "../../utils/ScrollToTop";
 import { useEffect } from "react";
 
-const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
+const newIndex: NextPage<{ slug: string; products: any }> = ({
+  slug,
+  products,
+}) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -21,18 +24,6 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
     });
   }, []);
 
-  const { data, isError, isLoading, error } = useQuery(
-    slug!,
-    async () => {
-      const res = await fetch(`${API_BASE_URL}/productsBySlug/${slug}`);
-      return res.json();
-    },
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    }
-  );
-
   const stagger = {
     animate: {
       transition: {
@@ -40,8 +31,6 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
       },
     },
   };
-
-  if (isError) return <p>{error as string}</p>;
 
   return (
     <motion.div
@@ -56,8 +45,8 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
       </Head>
       <Layout className={classes.body}>
         <Box alignItems="center" position="relative" display="flex">
-          <Link href="/new">
-            <Button href="/new" className={classes.back}>
+          <Link href="/">
+            <Button href="/" className={classes.back}>
               Back
             </Button>
           </Link>
@@ -74,26 +63,12 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
             alignItems="center"
             className={classes.productsContainer}
           >
-            {isLoading &&
-              [1, 2, 3, 4, 5, 6].map((_, i) => (
-                <Skeleton
-                  variant="rect"
-                  height={400}
-                  width={450}
-                  animation="wave"
-                  style={{
-                    borderRadius: "12px",
-                    marginBottom: 15,
-                    marginTop: 15,
-                  }}
-                  key={i}
-                />
-              ))}
-            {data?.products?.map((p: any, i: number) => (
+            {products?.map((p: any, i: number) => (
               <Link
+                key={i}
                 scroll={false}
-                href="/new/[slug]/[id]"
-                as={`/new/${slug}/${p._id}`}
+                href="/[slug]/[id]"
+                as={`/${slug}/${p._id}`}
               >
                 <a className={classes.link}>
                   <Product
@@ -115,9 +90,32 @@ const newIndex: NextPage<{ slug: string }> = ({ slug }) => {
   );
 };
 
-newIndex.getInitialProps = ({ query }) => {
+export const getStaticPaths = () => {
   return {
-    slug: query.slug as string,
+    paths: [
+      { params: { slug: "electronics" } },
+      { params: { slug: "skincare" } },
+      { params: { slug: "food" } },
+      { params: { slug: "juices" } },
+    ],
+    fallback: false,
+  };
+};
+
+const fetchProducts = async (slug: string) => {
+  const res = await fetch(`${API_BASE_URL}/productsBySlug/${slug}`);
+
+  return res;
+};
+
+export const getStaticProps = async ({ params: { slug } }: any) => {
+  const data = await fetchProducts(slug).then((res) => res.json());
+
+  return {
+    props: {
+      products: (data as any).products,
+      slug,
+    },
   };
 };
 
