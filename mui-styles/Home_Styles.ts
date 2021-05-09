@@ -5,7 +5,7 @@ const useStyles = makeStyles(
     ({
       container: {
         minHeight: "100vh",
-        padding: "0 0.5rem",
+        padding: "10px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -17,9 +17,8 @@ const useStyles = makeStyles(
       },
       body: {
         flexDirection: "row",
-        paddingRight: "56px !important",
-        paddingLeft: "56px !important",
-        paddingBottom: "10px !important",
+        paddingRight: "30px !important",
+        paddingLeft: "30px !important",
         [theme.breakpoints.down("md")]: {
           paddingLeft: "0px !important",
           paddingRight: "0px !important",
@@ -95,12 +94,11 @@ const useStyles = makeStyles(
         color: "rgba(0,0,0,0.7)",
       },
       img: {
-        width: 580,
         position: "absolute",
         right: 0,
-        top: 64,
+        top: 0,
         objectFit: "contain",
-        zIndex: 10,
+        height: "100%",
       },
       wlcmTitle: {
         fontSize: 30,
@@ -108,7 +106,13 @@ const useStyles = makeStyles(
       main: {
         // background:
         //   "linear-gradient(194.01deg, #D9E8EF 9.6%, #DCEAF0 22.94%, #EAF2F5 89.64%);",
-        [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+        paddingLeft: 50,
+        [theme.breakpoints.down(theme.breakpoints.values.md)]: {
+          display: "none",
+        },
+      },
+      dummy: {
+        [theme.breakpoints.down(theme.breakpoints.values.md)]: {
           display: "none",
         },
       },

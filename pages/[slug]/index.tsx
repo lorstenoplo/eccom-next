@@ -5,10 +5,10 @@ import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useQuery } from "react-query";
-import { Layout, Product } from "../../../components";
-import useStyles from "../../../mui-styles/Home_Styles";
-import { API_BASE_URL } from "../../../utils/constants";
-import ScrollToTop from "../../../utils/ScrollToTop";
+import { Layout, Product } from "../../components";
+import useStyles from "../../mui-styles/Home_Styles";
+import { API_BASE_URL } from "../../utils/constants";
+import ScrollToTop from "../../utils/ScrollToTop";
 import { useEffect } from "react";
 
 const newIndex: NextPage<{ slug: string }> = ({ slug }) => {

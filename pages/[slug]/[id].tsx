@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { fetchProduct } from "../../../api-functions/queries/fetchProduct";
-import useStyles from "../../../mui-styles/Product_Styles";
-import { useStateValue } from "../../../context/StateProvider";
-import { LoadingScreen } from "../../../components";
+import { fetchProduct } from "../../api-functions/queries/fetchProduct";
+import useStyles from "../../mui-styles/Product_Styles";
+import { useStateValue } from "../../context/StateProvider";
+import { LoadingScreen } from "../../components";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
