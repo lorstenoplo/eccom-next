@@ -9,9 +9,11 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Button, Tooltip, Zoom, IconButton, Badge } from "@material-ui/core";
+import { Product } from "../../components/Order/types";
 
-const pg: NextPage<{ id: string }> = ({ id }) => {
+const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
   const { push, back } = useRouter();
+  console.log(product);
 
   const { isLoading, isError, data, error } = useQuery(
     ["product", id],
@@ -162,9 +164,21 @@ const pg: NextPage<{ id: string }> = ({ id }) => {
   );
 };
 
-pg.getInitialProps = ({ query }) => {
+export const getStaticPaths = async () => {
   return {
-    id: query.id as string,
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async ({ params: { id } }: any) => {
+  const data = await fetchProduct(id as string);
+
+  return {
+    props: {
+      product: data,
+      id,
+    },
   };
 };
 
