@@ -116,9 +116,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     width: "90%",
-    marginBottom: 10,
+    marginBottom: 15,
     [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
       width: "100%",
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.xs)]: {
+      width: "95%",
     },
   },
 }));

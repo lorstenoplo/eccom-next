@@ -135,7 +135,9 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
             odit.
           </motion.p>
           <motion.div variants={fadeInUp} className={classes.moreInfo}>
-            <motion.p>${product.price}</motion.p>
+            <motion.p style={{ fontSize: 16, fontWeight: "bold" }}>
+              ${product.price}
+            </motion.p>
             <div className={classes.ratingCont}>
               {Array(product.rating)
                 .fill(null)
