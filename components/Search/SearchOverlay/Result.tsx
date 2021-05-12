@@ -20,7 +20,7 @@ const Result: FC<Props> = ({
 }) => {
   const classes = useStyles();
   return (
-    <Link href="/slug/[id]" as={`/products/${_id}`}>
+    <Link href="/slug/[id]" as={`/${slug}/${_id}`}>
       <a>
         <Box
           alignItems="center"
