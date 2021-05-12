@@ -104,6 +104,23 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  ratingCont: {
+    display: "flex",
+    alignItems: "center",
+  },
+  star: {
+    color: "#DAA520",
+  },
+  moreInfo: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "90%",
+    marginBottom: 10,
+    [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+      width: "100%",
+    },
+  },
 }));
 
 export default useStyles;

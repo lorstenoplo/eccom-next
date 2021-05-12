@@ -16,11 +16,11 @@ type Props = {
 };
 
 const Result: FC<Props> = ({
-  result: { title, imageURL, rating, price, _id },
+  result: { title, imageURL, rating, price, _id, slug },
 }) => {
   const classes = useStyles();
   return (
-    <Link href="/products/[productId]" as={`/products/${_id}`}>
+    <Link href="/slug/[id]" as={`/products/${_id}`}>
       <a>
         <Box
           alignItems="center"

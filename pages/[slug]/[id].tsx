@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 import { fetchProduct } from "../../api-functions/queries/fetchProduct";
 import useStyles from "../../mui-styles/Product_Styles";
 import { useStateValue } from "../../context/StateProvider";
@@ -8,36 +7,26 @@ import { LoadingScreen } from "../../components";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { Button, Tooltip, Zoom, IconButton, Badge } from "@material-ui/core";
+import {
+  Button,
+  Tooltip,
+  Zoom,
+  IconButton,
+  Badge,
+  Box,
+} from "@material-ui/core";
 import { Product } from "../../components/Order/types";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
-  const { push, back } = useRouter();
-  console.log(product);
-
-  const { isLoading, isError, data, error } = useQuery(
-    ["product", id],
-    async () => {
-      const data = await fetchProduct(id as string);
-      return data;
-    },
-    {
-      retry: 1,
-    }
-  );
+  const { push, back, isFallback } = useRouter();
   const classes = useStyles();
 
   const { dispatch, state } = useStateValue();
 
-  if (isLoading) {
+  if (isFallback) {
     return <LoadingScreen />;
-  }
-  if (isError) {
-    return (
-      <motion.p initial="initial" animate="animate" exit={{ opacity: 0 }}>
-        {error as string}
-      </motion.p>
-    );
   }
 
   let easing = [0.6, -0.05, 0.01, 0.99];
@@ -67,15 +56,15 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
   };
 
   const addToBasket = () => {
-    if (data) {
+    if (product) {
       dispatch({
         type: "ADD_TO_BASKET",
         value: {
-          id: data._id,
-          title: data.title,
-          imageURL: data.imageURL,
-          rating: data.rating,
-          price: data.price,
+          id: product._id,
+          title: product.title,
+          imageURL: product.imageURL,
+          rating: product.rating,
+          price: product.price,
         },
       });
     }
@@ -89,7 +78,7 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
       exit={{ opacity: 0 }}
     >
       <Head>
-        <title>{data?.title || "Loading..."}</title>
+        <title>{product?.title || "Loading..."}</title>
         <link rel="icon" href="/logo.png" type="image/png" />
       </Head>
 
@@ -102,8 +91,8 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
           {"<"}
         </div>
         <motion.img
-          src={data?.imageURL}
-          alt={data?.title || "error"}
+          src={product?.imageURL}
+          alt={product?.title || "error"}
           animate={{ x: 0, opacity: 1 }}
           initial={{ x: 200, opacity: 0 }}
           exit={{ opacity: 0 }}
@@ -138,13 +127,28 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
               </IconButton>
             </Tooltip>
           </motion.div>
-          <motion.h1 variants={fadeInUp}>{data?.title}</motion.h1>
+          <motion.h1 variants={fadeInUp}>{product?.title}</motion.h1>
           <motion.p className={classes.productInfo} variants={fadeInUp}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
             suscipit quaerat quod, accusantium ipsa eum officiis quam, accusamus
             sapiente amet sequi, quos quas qui aliquid. Aperiam enim rem fugit
             odit.
           </motion.p>
+          <motion.div variants={fadeInUp} className={classes.moreInfo}>
+            <motion.p>${product.price}</motion.p>
+            <div className={classes.ratingCont}>
+              {Array(product.rating)
+                .fill(null)
+                .map((_, i) => (
+                  <StarIcon key={i} className={classes.star} />
+                ))}
+              {Array(5 - product.rating)
+                .fill(null)
+                .map((_, i) => (
+                  <StarBorderIcon key={i} className={classes.star} />
+                ))}
+            </div>
+          </motion.div>
           <motion.div className={classes.btnCont} variants={fadeInUp}>
             <Button
               onClick={addToBasket}

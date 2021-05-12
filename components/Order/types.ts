@@ -4,7 +4,7 @@ export interface CreatedAt {
 }
 
 export interface Product {
-  id: string;
+  _id: string;
   imageURL: string;
   price: number;
   rating: number;
