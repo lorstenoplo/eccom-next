@@ -18,7 +18,7 @@ export const reducer: Reducer<ContextDefaultType, Actions> = (
 
     case "REMOVE_FROM_BASKET":
       const index = state.basket.findIndex(
-        (basketItem) => basketItem.id === action.value
+        (basketItem) => basketItem._id === action.value
       );
       let newBasket = [...state.basket];
 

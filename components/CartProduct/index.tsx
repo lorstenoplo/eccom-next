@@ -8,7 +8,7 @@ import truncate from "../../utils/truncate";
 import useStyles from "../../mui-styles/Cart_Styles";
 import { Product } from "../Order/types";
 
-const CartProduct: React.FC<Product> = ({ id, imageURL, title, price }) => {
+const CartProduct: React.FC<Product> = ({ _id, imageURL, title, price }) => {
   const { dispatch } = useStateValue();
   const classes = useStyles();
   return (
@@ -34,7 +34,7 @@ const CartProduct: React.FC<Product> = ({ id, imageURL, title, price }) => {
             onClick={() =>
               dispatch({
                 type: "REMOVE_FROM_BASKET",
-                value: id,
+                value: _id,
               })
             }
           >

@@ -60,7 +60,7 @@ const pg: NextPage<{ id: string; product: Product }> = ({ id, product }) => {
       dispatch({
         type: "ADD_TO_BASKET",
         value: {
-          id: product._id,
+          _id: product._id,
           title: product.title,
           imageURL: product.imageURL,
           rating: product.rating,

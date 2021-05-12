@@ -24,10 +24,10 @@ const cart: NextPage = () => {
       <Layout navColor="#fff" className={classes.page}>
         <motion.div className={classes.productsContainer} variants={stagger}>
           {state.basket.map(
-            ({ id, title, imageURL, price, rating, category }, i) => (
+            ({ _id, title, imageURL, price, rating, category }, i) => (
               <CartProduct
                 key={i}
-                id={id}
+                _id={_id}
                 title={title}
                 imageURL={imageURL}
                 price={price}
