@@ -8,6 +8,7 @@ import useStyles from "../mui-styles/Home_Styles";
 import ScrollToTop from "../utils/ScrollToTop";
 import useGetUser from "../utils/useGetUser";
 import CustomHead from "../utils/CustomHead";
+import Image from "next/image";
 
 const Index: NextPage = () => {
   const classes = useStyles();
@@ -33,7 +34,10 @@ const Index: NextPage = () => {
       <Layout className={classes.body}>
         <motion.div style={{ width: "100%" }} variants={stagger}>
           <Box
-            style={{ backgroundImage: "url(https://i.ibb.co/GPxr02K/bg.jpg)" }}
+            style={{
+              backgroundImage: "url(https://i.ibb.co/GPxr02K/bg.jpg)",
+              backgroundSize: "cover",
+            }}
             height="calc(100vh - 64px)"
             position="absolute"
             top="64px"
@@ -62,9 +66,15 @@ const Index: NextPage = () => {
                 </Typography>
               </Box>
             </Box>
-            <img
+            {/* <img
               src="https://i.ibb.co/PmspZjD/apple.png"
               alt="hero-feature"
+              className={classes.img}
+            /> */}
+            <Image
+              priority={true}
+              layout="fill"
+              src="/apple.png"
               className={classes.img}
             />
           </Box>

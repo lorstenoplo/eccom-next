@@ -99,6 +99,9 @@ const useStyles = makeStyles(
         top: 0,
         objectFit: "contain",
         height: "100%",
+        width: "auto !important",
+        left: "auto !important",
+        minWidth: "auto !important",
       },
       wlcmTitle: {
         fontSize: 30,
