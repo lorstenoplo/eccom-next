@@ -35,7 +35,7 @@ const Index: NextPage = () => {
         <motion.div style={{ width: "100%" }} variants={stagger}>
           <Box
             style={{
-              backgroundImage: "url(https://i.ibb.co/GPxr02K/bg.jpg)",
+              backgroundImage: "url(/bg.jpg)",
               backgroundSize: "cover",
             }}
             height="calc(100vh - 64px)"
