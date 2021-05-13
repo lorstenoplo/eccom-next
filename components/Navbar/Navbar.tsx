@@ -156,10 +156,16 @@ const Navbar: React.FC<NavbarProps> = (props) => {
     // user is logged out
     UserBody = () => (
       <>
-        <MenuItem button onClick={() => router.push("/login")}>
+        <MenuItem
+          button
+          onClick={() => router.push(`/login?next=${router.pathname}`)}
+        >
           Login
         </MenuItem>
-        <MenuItem button onClick={() => router.push("/register")}>
+        <MenuItem
+          button
+          onClick={() => router.push(`/register?next=${router.pathname}`)}
+        >
           Register
         </MenuItem>
       </>
@@ -176,7 +182,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         <MenuItem
           onClick={() => {
             localStorage.removeItem("qid");
-            router.replace("/login");
+            router.replace(`/login?next=${router.pathname}`);
           }}
         >
           Logout

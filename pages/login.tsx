@@ -47,7 +47,7 @@ const Login: React.FC<loginProps> = () => {
               setErrors(toErrorMap(response.errors));
             } else if (user && token) {
               localStorage.setItem("qid", token);
-              router.replace("/");
+              router.replace((router.query.next as string) || "/");
             }
           }}
         >
@@ -78,7 +78,7 @@ const Login: React.FC<loginProps> = () => {
                   onChange={handleChange}
                   name="password"
                   value={values.password}
-                  password
+                  isPassword
                 />
                 <Box my={2} width="100%">
                   <Typography variant="body2">

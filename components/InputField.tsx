@@ -14,7 +14,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label?: string;
-  password?: boolean;
+  isPassword?: boolean;
 };
 
 const InputField: React.FC<InputFieldProps> = (props) => {
@@ -27,7 +27,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
     event.preventDefault();
   };
 
-  if (props.password) {
+  if (props.isPassword) {
     return (
       <FormControl variant="outlined" margin="normal" error={!!error} fullWidth>
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>

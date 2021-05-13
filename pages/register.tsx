@@ -45,7 +45,7 @@ const Register: React.FC<registerProps> = () => {
               setErrors(toErrorMap(response.errors));
             } else if (user && token) {
               localStorage.setItem("qid", token);
-              router.replace("/");
+              router.replace((router.query.next as string) || "/");
             }
           }}
         >
@@ -80,7 +80,7 @@ const Register: React.FC<registerProps> = () => {
                 />
                 <InputField
                   onChange={handleChange}
-                  password
+                  isPassword
                   name="password"
                   value={values.password}
                 />
