@@ -33,7 +33,7 @@ const Index: NextPage = () => {
       <Layout className={classes.body}>
         <motion.div style={{ width: "100%" }} variants={stagger}>
           <Box
-            style={{ backgroundImage: "url(/bg.jpg)" }}
+            style={{ backgroundImage: "url(https://i.ibb.co/GPxr02K/bg.jpg)" }}
             height="calc(100vh - 64px)"
             position="absolute"
             top="64px"
@@ -62,7 +62,11 @@ const Index: NextPage = () => {
                 </Typography>
               </Box>
             </Box>
-            <img src="/apple.png" alt="hero-feature" className={classes.img} />
+            <img
+              src="https://i.ibb.co/PmspZjD/apple.png"
+              alt="hero-feature"
+              className={classes.img}
+            />
           </Box>
           <Box className={classes.dummy} height="100vh"></Box>
           {!isLoadingUser && !user ? (
