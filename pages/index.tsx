@@ -37,6 +37,7 @@ const Index: NextPage = () => {
             style={{
               backgroundImage: "url(/bg.jpg)",
               backgroundSize: "cover",
+              width: "100%"
             }}
             height="calc(100vh - 64px)"
             position="absolute"
