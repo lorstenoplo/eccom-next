@@ -21,7 +21,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   const [user, isLoading, isError] = useGetUser();
   const [loading, setLoading] = React.useState<boolean>(false);
   const classes = useStyles();
-  const { state } = useStateValue();
+  const { state, dispatch } = useStateValue();
   const router = useRouter();
 
   if (isLoading || isError) {
@@ -44,6 +44,10 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
       console.dir(err);
       setLoading(false);
     }
+    
+    dispatch({
+                type: 'EMPTY_BASKET'
+            })
 
     setLoading(false);
     router.push("/orders");
