@@ -46,7 +46,8 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
     }
     
     dispatch({
-                type: 'EMPTY_BASKET'
+                type: 'EMPTY_BASKET',
+      value:""
             })
 
     setLoading(false);
