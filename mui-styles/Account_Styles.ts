@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     fontWeight: 500,
     color: "rgb(95, 99, 104)",
+    textAlign: "center",
   },
   userProfileCont: {
     display: "flex",
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     justifyContent: "space-evenly",
     padding: 30,
+    flexDirection: "column",
   },
   editBtn: {
     textTransform: "none",
@@ -25,5 +27,12 @@ const useStyles = makeStyles((theme) => ({
   delteBtn: {
     textTransform: "none",
   },
+  btnCont:{
+    display: "flex",
+    justifyContent: "space-evenly",
+    [theme.breakpoints.down(theme.breakpoints.values.sm)]: {
+      justifyContent: "space-between",
+    }
+  }
 }));
 export default useStyles;
