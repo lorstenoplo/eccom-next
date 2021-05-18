@@ -34,7 +34,7 @@ const AccountPage: FC<Props> = ({ mutation, values, disabled }) => {
     <div className={classes.userProfileCont}>
       <Avatar
         style={{ width: 200, height: 200 }}
-        src="https://material-ui.com/static/images/avatar/1.jpg"
+        src="https://scenesfromanimaginaryfilm.files.wordpress.com/2016/01/thevoid.jpg?w=615"
       />
       <div>
         <Typography style={{textAlign: "center"}} variant="h4">Welcome, {values.username || "Guest"}</Typography>
