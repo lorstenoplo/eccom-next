@@ -42,7 +42,7 @@ const AccountPage: FC<Props> = ({ mutation, values, disabled }) => {
           Manage your info, privacy and security to make FalconCode work better
           for you. Find out more
         </p>
-        <Box mt={4}>
+        <Box className={classes.btnCont} mt={4}>
           <Button
             className={classes.editBtn}
             startIcon={<EditRoundedIcon />}
