@@ -37,7 +37,7 @@ const AccountPage: FC<Props> = ({ mutation, values, disabled }) => {
         src="https://material-ui.com/static/images/avatar/1.jpg"
       />
       <div>
-        <Typography variant="h4">Welcome, {values.username || guest}</Typography>
+        <Typography variant="h4">Welcome, {values.username || "Guest"}</Typography>
         <p className={classes.info}>
           Manage your info, privacy and security to make FalconCode work better
           for you. Find out more
