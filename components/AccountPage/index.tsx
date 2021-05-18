@@ -69,7 +69,6 @@ const AccountPage: FC<Props> = ({ mutation, values, disabled }) => {
             )}
           </Button>
           {mutation.isError && <p>{(mutation.error as any).message}</p>}
-          {mutation.isLoading && <p>Wait while we delete your account</p>}
         </Box>
       </div>
     </div>
