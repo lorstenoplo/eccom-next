@@ -168,7 +168,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
           )}
         </Button>
         {!user && <div>You are not logged in!, <Link href="/login?next=/cart"><a style={{color:"#2196f3", marginBottom:5}}>Click to Login</a></Link></div>}
-        {state.basket.length === 0 && <div>You are cart is empty!, <Linkhref="/"><a style={{color:"#2196f3"}}>Click to Add Products</a></Link></div>}
+        {state.basket.length === 0 && <div>You are cart is empty!, <Link href="/" ><a style={{color:"#2196f3"}}>Click to Add Products</a></Link></div>}
       </Box>
     </Box>
   );
