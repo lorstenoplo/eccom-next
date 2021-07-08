@@ -118,6 +118,11 @@ export const useStyles = makeStyles(
         left: 9,
         zIndex: 1,
       },
+      searchCont:{
+        [theme.breakpoints.up("md")]: {
+          position: "relative"
+        }
+      }
     } as const)
 );
 
@@ -242,7 +247,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
           </NextLink>
           <InstantSearch searchClient={searchClient} indexName="products">
             <ClickAwayListener onClickAway={handleClickAway}>
-              <div>
+              <div className={classes.searchCont}>
                 <CustomSearchBar setFocused={setFocused} />
                 {focused && <SearchOverlay />}
               </div>
