@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CartOptionsSectionPropsType } from "./types";
 import CartOption from "../CartOption";
 import { Box, Button, CircularProgress } from "@material-ui/core";
@@ -27,6 +27,14 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   if (isLoading || isError) {
     return null;
   }
+  
+  useEffect(()=>{
+    if(!user){
+      router.replace("/login?next=/cart")
+    }else if(state.basket.length === 0){
+      router.replace("/")
+    }
+  },[user, state.basket])
 
   const placeOrder = async () => {
     setLoading(true);
