@@ -16,6 +16,7 @@ import { getBasketTotal } from "../../context/reducer";
 import { useStateValue } from "../../context/StateProvider";
 import { db } from "../../utils/firebase";
 import firebase from "firebase/app";
+import Link from "next/link";
 
 const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   const [user, isLoading, isError] = useGetUser();
@@ -27,12 +28,6 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   if (isLoading || isError) {
     return null;
   }
-  
-  useEffect(()=>{
-    if(!user && !isLoading){
-      router.replace("/login?next=/cart")
-    }
-  },[user]);
   
   useEffect(()=>{
     if(state.basket.length === 0){
@@ -158,13 +153,14 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
         width="100%"
         justifyContent="flex-end"
         display="flex"
+        flexDirection="column"
       >
         <Button
           color="primary"
           size="large"
           variant="contained"
           disableElevation
-          style={{ textTransform: "none" }}
+          style={{ textTransform: "none", marginBottom: 15 }}
           onClick={placeOrder}
           disabled={loading || !user || state.basket.length === 0}
         >
@@ -177,6 +173,7 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
             />
           )}
         </Button>
+        {!user && <div>You are not logged in!, <Link href="/login?next=/cart"><a>Click to Login</a></Link></div>}
       </Box>
     </Box>
   );
