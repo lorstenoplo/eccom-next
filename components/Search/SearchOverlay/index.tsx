@@ -7,7 +7,6 @@ const CustomHits = ({ hits }: any) => {
   return (
     <Box
       position="absolute"
-      left="45%"
       top="60px"
       borderRadius="8px"
       bgcolor="white"
