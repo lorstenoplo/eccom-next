@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CartOptionsSectionPropsType } from "./types";
 import CartOption from "../CartOption";
 import { Box, Button, CircularProgress } from "@material-ui/core";
@@ -28,12 +28,6 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   if (isLoading || isError) {
     return null;
   }
-  
-  useEffect(()=>{
-    if(state.basket.length === 0){
-      router.push("/")
-    }
-  },[state.basket])
 
   const placeOrder = async () => {
     setLoading(true);
@@ -173,7 +167,8 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
             />
           )}
         </Button>
-        {!user && <div>You are not logged in!, <Link href="/login?next=/cart"><a>Click to Login</a></Link></div>}
+        {!user && <div>You are not logged in!, <Link href="/login?next=/cart"><a style={{color:"#2196f3", marginBottom:5}}>Click to Login</a></Link></div>}
+        {state.basket.length === 0 && <div>You are cart is empty!, <Linkhref="/"><a style={{color:"#2196f3"}}>Click to Add Products</a></Link></div>}
       </Box>
     </Box>
   );
