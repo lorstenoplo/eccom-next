@@ -19,6 +19,7 @@ a {
 .search_cont {
   overflow-y: scroll;
   box-shadow: rgb(0 0 0 / 70%) -3px 4px 14px;
+  left: 10px !important;
 }
 
 .search_cont::-webkit-scrollbar {
@@ -33,7 +34,6 @@ a {
   height: 10px;
   background-clip: padding-box;
   border: 4px solid rgba(0, 0, 0, 0);
-  left: 10px !important;
 }
 
 @media only screen and (max-width: 650px) {
