@@ -3,7 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     img: {
-      height: 300,
+      objectFit:"contain",
       borderRadius: 5,
       width: "100%",
       [theme.breakpoints.down("md")]: {
