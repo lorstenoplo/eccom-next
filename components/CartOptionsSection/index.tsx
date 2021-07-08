@@ -29,12 +29,16 @@ const CartOptionsSection: React.FC<CartOptionsSectionPropsType> = () => {
   }
   
   useEffect(()=>{
-    if(!user){
+    if(!user && !isLoading){
       router.replace("/login?next=/cart")
-    }else if(state.basket.length === 0){
-      router.replace("/")
     }
-  },[user, state.basket])
+  },[user]);
+  
+  useEffect(()=>{
+    if(state.basket.length === 0){
+      router.push("/")
+    }
+  },[state.basket])
 
   const placeOrder = async () => {
     setLoading(true);
