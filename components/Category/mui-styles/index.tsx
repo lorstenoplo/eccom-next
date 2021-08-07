@@ -6,10 +6,6 @@ const useStyles = makeStyles((theme: Theme) =>
       objectFit:"contain",
       borderRadius: 5,
       width: "100%",
-      [theme.breakpoints.down("md")]: {
-        height: 200,
-        objectFit:"unset",
-      },
     },
   })
 );
